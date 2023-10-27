@@ -2,34 +2,38 @@
 #define GIMNASIO_H
 #include <string>
 #include <iostream>
+#include <ctime>
+#include "clientes.h"
 using namespace std;
 
-
-enum tipo{Spinning, Yoga, Pilates, Stretching, Zumba,  Boxeo};
-typedef enum tipo Class;
-struct Clase{
-    Class tipo;
-    string salas;
-    int horarioComienzo;//se puede usar c time
-    int cupos_tot;
-    int cupos_act;
+#define cupos_total_gym 30;
 
 
 
-};
-
-typedef struct Clase sClase;
-
-//#define cupos_total 30;
-
-struct Musculacion{
-    float horarioComienzo;//se puede usar c time
-    int cupos_total;
-    int cupos_act;
-
+struct gym{
+    unsigned int IDcurso;
+    time_t FechaInsc;
+    sClientes* misclientes;
+    string clase;
+    time_t horario;
+    int cupos_tot_clases;
+    int cupos_act_clases;
 
 };
 
-//#define cupos_total 30;
+typedef struct gym sGimnasio;
+
+
+
+
+
+
+//funciones para las clases
+void reserva(sClientes cli, unsigned int IDclase);
+void cancelacion(sClientes cli, Class claseelegida);
+void cambiosenreserva(sClientes cli, Class clasevieja, Class clasenueva);
+
+
+
 
 #endif // GIMNASIO_H
