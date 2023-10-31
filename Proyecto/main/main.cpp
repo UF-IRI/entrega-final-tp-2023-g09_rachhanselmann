@@ -29,7 +29,7 @@ int main() {
    if (arch_clientes.is_open()) {
       string linea;
 
-       while( arch_clientes>>linea){
+       while( getline(arch_clientes&linea)){
            cout << linea << endl; // Muestra cada línea del archivo
        }
 
