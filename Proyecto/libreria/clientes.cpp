@@ -11,7 +11,7 @@ void guardarcli(fstream &Archivo,sClientes cli)
     {
         getline(Archivo, aux);
 
-        if (aux == "\0") //si en la primer linea no hay nada,tengo que poner el encabezad
+        if (aux == "\0") //si en la primer linea no hay nada,tengo que poner el encabezado
         {
             Archivo <<"iD"<<","<<"nombre"<<","<<"apellido"<<","<<"email"<<","<<"numero de telefono"<<","<<"fecha nacimiento"<<","<<"estado"<< endl;
         }

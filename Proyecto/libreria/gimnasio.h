@@ -34,6 +34,7 @@ void reserva(sClientes cli, unsigned int IDclase);
 void cancelacion(sClientes cli, Class claseelegida);
 void cambiosenreserva(sClientes cli, Class clasevieja, Class clasenueva);
 void guardarClase(fstream& archivo, sGimnasio gym);
+bool CrearlistaClases(arch_clase*& clases, *n);
 
 
 

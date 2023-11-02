@@ -15,13 +15,15 @@ int main() {
 
    arch_clase.open("iriClasesGYM");
    arch_clientes.open("iriClientesGYM");
-   //arch_asistencias.open("asistencias_1697673600000");
+   arch_asistencias.open("asistencias_1697673600000");
+
+
 
    if (arch_clase.is_open()) {
        arch_clase << "Datos de clases" << endl;
 
    } else {
-       cerr << "No se pudo abrir el archivo de clases." << std::endl;
+       cerr << "No se pudo abrir el archivo de clases." << endl;
    }
 
   //lectura del archivo
@@ -34,7 +36,7 @@ int main() {
        }
 
    } else {
-       cerr << "No se pudo abrir el archivo de clientes." << std::endl;
+       cerr << "No se pudo abrir el archivo de clientes." << endl;
    }
 
    ofstream archibinwr("asistencias_1697673600000.dat", ios::binary);
