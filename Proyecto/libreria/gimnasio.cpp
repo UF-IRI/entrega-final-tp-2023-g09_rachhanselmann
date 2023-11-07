@@ -6,31 +6,33 @@ void reserva(sClientes cli, unsigned int IDclase)
 
 }
 
-bool CrearlistaClases(fstream*& clases, n)
+bool CrearlistaClases(ifstream* archi, sClases* cla)
 {
-    //fstream archi;
-    //archi.open(name, ios::in);
 
-    if(!(clases.is_open()))//chequeo que el archivo este abierto
+    if(!(archi->is_open()))//chequeo que el archivo este abierto
         return false;
 
-    if(clases==nullptr)//chequeo que el archivo no este vacio
+    if(archi==nullptr)//chequeo que el archivo no este vacio
         return false;
 
-    fstream* nuevo=new clases[n];//creando una lista dinamica
+    string encabezado;
 
-    fstream aux;
+    getline(*archi, encabezado);
+
+    string auxID;
+    string auxnombre;
+    time_t auxhorario;
     char coma;
-    string dummy;
+   // stringstream ss; solo para string por eso es una fiaca para cuando tenemos distintos tipos de datos
 
-    clases>>dummy>>coma>>dummy>>coma>>dummy>>coma>>endl;
 
-    while(clases)
+
+    while(*archi)
     {
-        //clases>>aux.
-        //funcion de añadir
+        //clases>>dummy>>coma>>dummy>>coma>>dummy>>coma>>endl;
     }
 
+    return true;
 
 }
 
@@ -51,7 +53,7 @@ void guardarClase(fstream& archivo, sGimnasio gym)
         }
 
     }
-
+}
 
 
 
