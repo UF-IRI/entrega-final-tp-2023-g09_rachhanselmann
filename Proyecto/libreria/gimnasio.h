@@ -39,11 +39,11 @@ struct Clases{
 
 
 //funciones para las clases
-void reserva(sClientes cli, unsigned int IDclase);
+//void reserva(sClientes cli, unsigned int IDclase);
 //void cancelacion(sClientes cli, Class claseelegida);
 //void cambiosenreserva(sClientes cli, Class clasevieja, Class clasenueva);
-void guardarClase(fstream& archivo, sGimnasio gym);
-bool CrearlistaClases(ifstream* archi, sClases* cla);
+//void guardarClase(fstream& archivo, sGimnasio gym);
+//bool CrearlistaClases(ifstream* archi, sClases* cla);
 
 
 

@@ -16,6 +16,6 @@ struct Cliente{
 };
 typedef struct Cliente sClientes;
 
-void guardarcliente(fstream &Archivo,sClientes cli);
+//void guardarcliente(fstream &Archivo,sClientes cli);
 
 #endif // CLIENTES_H
