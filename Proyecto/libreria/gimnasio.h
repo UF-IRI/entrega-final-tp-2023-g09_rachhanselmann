@@ -10,15 +10,12 @@ using namespace std;
 #define cupos_total_gym 30;
 
 
-
 struct gym{
     unsigned int IDcurso;
     tm FechaInsc;
     sClientes* misclientes;
     string clase;
     tm horario;
-    int cupos_tot_clases;
-    int cupos_act_clases;
 
 }; typedef struct gym sGimnasio;
 
@@ -27,23 +24,38 @@ struct Clases{
 
     string IDclase;
     string nombre;
-    time_t horario;
+    string horario;
 
 }; typedef struct Clases sClases;
 
+//structs para archivos binarios
+
+struct inscripcion{
+    unsigned int iDCurso;
+    unsigned int fecha_inscrip;
+
+};typedef struct inscripcion sInscripcion;
 
 
+struct asistencia{
+    unsigned int iDCliente, cantInscriptos;
+    sInscripcion*CursosInscriptos;
 
+};typedef asistencia sAsistencia;
 
+//structs ad
 
+struct fecha{
+    int dia;
+    int mes;
+    int anio;
 
+};typedef struct fecha sFecha;
 
-//funciones para las clases
-//void reserva(sClientes cli, unsigned int IDclase);
-//void cancelacion(sClientes cli, Class claseelegida);
-//void cambiosenreserva(sClientes cli, Class clasevieja, Class clasenueva);
-//void guardarClase(fstream& archivo, sGimnasio gym);
-//bool CrearlistaClases(ifstream* archi, sClases* cla);
+struct cupos{
+    unsigned int cupos_act;
+    unsigned int cupos_tot;
+};typedef struct cupos sCupos;
 
 
 

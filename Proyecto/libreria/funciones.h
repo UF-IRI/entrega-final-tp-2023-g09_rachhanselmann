@@ -2,6 +2,12 @@
 #define FUNCIONES_H
 #include "clientes.h"
 #include "gimnasio.h"
+#include <fstream>
+#include  <string>
+#include<iostream>
+
+using namespace std;
+
 
 
 //funciones para las clases
@@ -14,16 +20,16 @@ bool CrearlistaClases(ifstream* archi, sClases* cla);
 //clientes
 void guardarcliente(fstream &Archivo,sClientes cli);
 void resize_cli(sClientes*& lista, int &n);
-
-string LeerArchivoClientes(ifstream* archivo,sClientes *lista,int &n);
-string EscribirArchivoClientes(ofstream* archi,sClientes* listacli,int N);
+sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n );
+bool LeerArchivoClientes(ifstream* archivo,sClientes *lista,int n);
+bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N);
 
 //Gimnasio
-string LeerArchivoGym(ifstream* archigym,sGimnasio *list,int &n);
-string reservacupos(ofstream* archiasist,sGimnasio* cupo);//binario
-string leerasistencia(ifstream* archiasist,sGimnasio* cupo);
+bool LeerArchivoGym(ifstream* archigym,sGimnasio *list,int &n);
+bool reservacupos(ofstream* archiasist,sGimnasio* cupo);//binario
+bool leerasistencia(ifstream* archiasist,sGimnasio* cupo);
 
-
+//
 
 
 

@@ -1,7 +1,4 @@
 #include "funciones.h"
-#include <fstream>
-#include  <string>
-using namespace std;
 
 //funciones para Clientes
 
@@ -14,86 +11,146 @@ void resize_cli(sClientes*& lista, int &n){
     lista=aux;
 }
 
-string LeerArchivoClientes(ifstream* archicli,sClientes *list,int &n){
+bool LeerArchivoClientes(ifstream* archicli,sClientes *list,int n){
     if (!archicli->is_open())
-        return "";
+        return false;
 
     string header;
     getline(*archicli,header);
 
-    sClientes *aux= new sClientes[n];
-
     string auxnombre, auxapellido, auxmail;
-    unsigned int auxiD, auxdni, auxnumero_telefono;
+    unsigned int auxiD, auxnumero_telefono;
     int auxestado; // 0=todo pago, positivo= dinero a favor, negativo=debe dinero
-    bool auxmembresia; //musculacion o clases
     tm auxfecha_nac;
     char coma=',';
     int i=0;
-    while()
-}//falta terminar, nose como hacer bien el leer
+    while(*archicli>>auxiD>>coma>>auxnombre>>coma>>auxapellido>>coma>>auxmail>>coma>>auxnumero_telefono>>coma>>auxfecha_nac>>>coma>>auxestado){
+        resize_cli(list,n);
+        (list+i)->iD=auxiD;
+        (list+i)->nombre=auxnombre;
+        (list+i)->apellido=auxapellido;
+        (list+i)->mail=auxmail;
+        (list+i)->numero_telefono=auxnumero_telefono;
+        (list+i)->fecha_nac=auxfecha_nac;
+        (list+i)->estado=auxestado;
+        i++;
+
+    }
+        return true;
+
+}
 
 
-string EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N){
+bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N){
     if(!archicli->is_open())
-        return "Error al abrir el archivo";
+        return false;
+
     char coma=',';
-    string lain;
+    string header;
 
-    getline(archicli, lain);
+    //getline(archicli, header);
 
-    if(lain=="")
-        archicli<<"iDcliente"<<coma<<"nombre"<<coma<<"apellido"<<coma<<"email"<<coma<<"telefono"<<coma<<"fechaNac"<<coma<<"estado"<<endl;
+    if(header=="")
+        *archicli<<"iDcliente"<<coma<<"nombre"<<coma<<"apellido"<<coma<<"email"<<coma<<"telefono"<<coma<<"fechaNac"<<coma<<"estado"<<endl;
 
 
     for(int i=0;i<N;i++){
-        archicli<<listacli[i].iD<<coma<<listacli[i].nombre<<coma<<listacli[i].apellido<<coma<<listacli[i].mail<<coma<<
-            listacli[i].numero_telefono<<coma<<listacli[i].fecha_nac<<coma<<listacli[i].estado<<endl;
+        *archicli<<listacli[i].iD<<coma<<listacli[i].nombre<<coma<<listacli[i].apellido<<coma<<listacli[i].mail<<coma<<listacli[i].numero_telefono<<coma<<listacli[i].fecha_nac<<coma<<listacli[i].estado<<endl;
 
     }
+    return true;
 }
+
+sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
+
+    if(!archicli->is_open() || lista==nullptr)
+        return nullptr;
+
+    sClientes* nuevalista= new sClientes[n];
+    char coma=',';
+    int i=0;
+
+    while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].fecha_nac>>coma>>nuevalista[i].estado){
+
+        resize_cli(nuevalista,n);
+        (lista+i)->iD=nuevalista->iD;
+        (lista+i)->nombre=nuevalista->nombre;
+        (lista+i)->apellido=nuevalista->apellido;
+        (lista+i)->mail=nuevalista->mail;
+        (lista+i)->numero_telefono=nuevalista->numero_telefono;
+        (lista+i)->fecha_nac=nuevalista->fecha_nac;
+        (lista+i)->estado=nuevalista->estado;
+
+        i++;
+    }
+    delete[] nuevalista;
+    return lista;
+
+}
+
+bool AgregarClienteLista(sClientes*lista,n){
+
+}
+
+
+
+
+
 
 
 //funciones gimnasio
 
-string LeerArchivoGym(ifstream* archigym,sGimnasio *list,int &n){
+void resize_clase(sClases*& lista, int &n){
+    n=(n)+1;
+    sClases *aux=new sClases[n];
+    for(int i=0;i<n-1;i++){
+        aux[i]=lista[i];}
+    delete[] lista;
+    lista=aux;
+}
+
+bool LeerArchivoGym(ifstream* archigym,sClases *list,int &n){
     if (!archigym->is_open())
-        return "";
+        return false;
 
     string header;
     getline(*archigym,header);
 
-    sGimnasio *aux= new sGimnasio[n];
-
-    unsigned int IDcurso;
-    tm FechaInsc;
-    sClientes* misclientes;
-    string clase;
-    tm horario;
-    int cupos_tot_clases;
-    int cupos_act_clases;
+    string auxIDclase;
+    string auxnombre;
+    time_t auxhorario;
     char coma=',';
     int i=0;
-    while()
+    while(*archigym>>auxIDclase>>coma>>auxnombre>>coma>>auxhorario){
+        resize_clase(list,n);
+        (list+i)->IDclase=auxIDclase;
+        (list+i)->nombre=auxnombre;
+        (list+i)->horario=auxhorario;
+        i++;
+        return true;
+    }
+
 }//falta terminar, nose como hacer bien el leer
 
-string reservacupos(ofstream* archiasist,sGimnasio* cupo){
+bool reservacupos(ofstream* archiasist,sGimnasio* cupo){
 
     if(!archiasist->is_open())
-        return "Error al abrir el archivo";
+        return false;
 
     archiasist->write((char*)cupo,sizeof(sGimnasio));//hay que ver como poner cada uno o si ya asi se pone todo lo que se necesita para la reserva
 
+    return true;
 }
 
-string leerasistencia(ifstream* archiasist,sGimnasio* cupo){
+bool leerasistencia(ifstream* archiasist,sClases* cupo){
 
     if(!archiasist->is_open())
-        return "No se pudeo abrir el archivo";
-    while(archiasist){
-        archiasist->read((char*)cupo, sizeof(sGimnasio));
+        return false;
 
-    }
 
+    archiasist->read((char*)cupo, sizeof(sGimnasio));
+
+    return true;
 
 }
+//funcion time, reservas,

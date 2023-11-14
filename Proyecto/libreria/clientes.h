@@ -7,12 +7,10 @@
 using namespace std;
 
 struct Cliente{
-
-    string nombre, apellido,mail;
-    unsigned int iD, dni, numero_telefono;
-    int estado; // 0=todo pago, positivo= dinero a favor, negativo=debe dinero
-    bool membresia; //musculacion o clases
+    string iD, nombre, apellido, mail;
+    unsigned int numero_telefono;
     tm fecha_nac;
+    int estado; // 0=todo pago, positivo= dinero a favor, negativo=debe dinero
 };
 typedef struct Cliente sClientes;
 
