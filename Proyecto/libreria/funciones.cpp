@@ -24,8 +24,11 @@ bool LeerArchivoClientes(ifstream* archicli,sClientes *list,int &n){
     tm auxfecha_nac;
     char coma=',';
     int i=0;
+
     while(*archicli>>auxiD>>coma>>auxnombre>>coma>>auxapellido>>coma>>auxmail>>coma>>auxnumero_telefono>>coma>>auxfecha_nac>>>coma>>auxestado){
+
         resize_cli(list,n);
+
         (list+i)->iD=auxiD;
         (list+i)->nombre=auxnombre;
         (list+i)->apellido=auxapellido;
@@ -160,6 +163,28 @@ bool leerasistencia(ifstream* archiasist,sAsistencia* cupo,int &n){
 void fechaInscripcion( ){
 
 }
+
+void InscripcionMusculito(bool resul)
+{
+    //bool para chequear en el main si es que la persona tiene un id generado o no
+    cout<<"Ingrese su nombre:"<<endl;
+    cin>>sClientes.nombre;
+    cout<<"Ingrese su apellido:"<<endl;
+    cin>>sClientes.apellido;
+    cout<<"Ingrese su mail:"<<endl;
+    cin>>sClientes.mail;
+    cout<<"Ingrese su telefono:"<<endl;
+    cin>>sClientes.numero_telefono;
+    cout<<"Ingrese su año de nacimiento:"<<endl;
+    cin>>sClientes.fecha_nac.anio;
+    cout<<"Ingrese su mes de nacimiento:"<<endl;
+    cin>>sClientes.fecha_nac.mes;
+    cout<<"Ingrese su dia de nacimiento:"<<endl;
+    cin>>sClientes.fecha_nac.dia;
+  //Habria que generarle el ID al cliente y el estado del pago deberiamos de encargarnos nosotros tambien, osea agregarlo a una lista asi el id del cliente sigue el orden y devolver esos datos
+}
+
+
 //funciones: bool reservas->parametros (lista archivo binario, lista de clases) recorrer las lista del binario y hacer un if que la lista del binario sea igual que la de la clase usamos un contador++
 //
 //funcion: pedir datos del cliente y despues llamar a generar reserva

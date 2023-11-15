@@ -29,6 +29,7 @@ bool LeerArchivoGym(ifstream* archigym,sGimnasio *list,int &n);
 bool escribirasistencia(ofstream* archiasist,sGimnasio* cupo);//binario
 bool leerasistencia(ifstream* archiasist,sGimnasio* cupo);
 
+void InscripcionMusculito(bool resul);
 //
 
 
