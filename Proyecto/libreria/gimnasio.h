@@ -29,10 +29,16 @@ struct Clases{
 }; typedef struct Clases sClases;
 
 //structs para archivos binarios
+struct fecha{
+    tm dia;
+    tm mes;
+    tm anio;
+    tm min;
+};typedef struct fecha sFecha;
 
 struct inscripcion{
     unsigned int iDCurso;
-    unsigned int fecha_inscrip;
+    sFecha fecha_insc;
 
 };typedef struct inscripcion sInscripcion;
 
@@ -43,14 +49,6 @@ struct asistencia{
 
 };typedef asistencia sAsistencia;
 
-//structs ad
-
-struct fecha{
-    int dia;
-    int mes;
-    int anio;
-
-};typedef struct fecha sFecha;
 
 struct cupos{
     unsigned int cupos_act;

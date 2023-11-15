@@ -72,7 +72,7 @@ sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
 
     while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].fecha_nac>>coma>>nuevalista[i].estado){
 
-        resize_cli(nuevalista,n);
+        resize_cli(lista,n);
         (lista+i)->iD=nuevalista->iD;
         (lista+i)->nombre=nuevalista->nombre;
         (lista+i)->apellido=nuevalista->apellido;
@@ -83,20 +83,20 @@ sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
 
         i++;
     }
-    delete[] nuevalista;
-    return lista;
+    delete[]lista ;
+    return nuevalista;
 
 }
 
-bool AgregarClienteLista(sClientes*lista,n){
+bool AgregarClienteLista(sClientes*lista,int n){
+
+
+
+
+
+
 
 }
-
-
-
-
-
-
 
 //funciones gimnasio
 
@@ -132,25 +132,44 @@ bool LeerArchivoGym(ifstream* archigym,sClases *list,int &n){
 
 }//falta terminar, nose como hacer bien el leer
 
-bool reservacupos(ofstream* archiasist,sGimnasio* cupo){
-
-    if(!archiasist->is_open())
-        return false;
-
-    archiasist->write((char*)cupo,sizeof(sGimnasio));//hay que ver como poner cada uno o si ya asi se pone todo lo que se necesita para la reserva
-
-    return true;
-}
-
-bool leerasistencia(ifstream* archiasist,sClases* cupo){
+bool escribirasistencia(ofstream* archiasist,sAsistencia* cupo){
 
     if(!archiasist->is_open())
         return false;
 
 
-    archiasist->read((char*)cupo, sizeof(sGimnasio));
+    archiasist->write((char*)cupo,sizeof(sAsistencia));//hay que ver como poner cada uno o si ya asi se pone todo lo que se necesita para la reserva
+
+    return true;
+}
+
+bool leerasistencia(ifstream* archiasist,sAsistencia* cupo,int &n){
+
+    if(!archiasist->is_open())
+        return false;
+
+
+    archiasist->read((char*)cupo, sizeof(sAsistencia));
 
     return true;
 
 }
+
+
 //funcion time, reservas,
+void fechaInscripcion( ){
+
+}
+//funciones: bool reservas->parametros (lista archivo binario, lista de clases) recorrer las lista del binario y hacer un if que la lista del binario sea igual que la de la clase usamos un contador++
+//
+//funcion: pedir datos del cliente y despues llamar a generar reserva
+//
+//funcion por separado para llamar a las distintas clases por su id y horario (con el cupo =cupo-34->primer turno)
+//
+//terminar el main, abrir y cerrar archivos, menu,
+//pedir id de cliente si esta anotado en un if y directo al menu
+// testings
+//como sumar los archivos al programa para poder usarlos
+//leer y escribir funcion clientes
+// fijar si hay que hacer + funciones extras a archivos
+// lunes a sabados!!

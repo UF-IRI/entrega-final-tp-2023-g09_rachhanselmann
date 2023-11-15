@@ -26,7 +26,7 @@ bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N);
 
 //Gimnasio
 bool LeerArchivoGym(ifstream* archigym,sGimnasio *list,int &n);
-bool reservacupos(ofstream* archiasist,sGimnasio* cupo);//binario
+bool escribirasistencia(ofstream* archiasist,sGimnasio* cupo);//binario
 bool leerasistencia(ifstream* archiasist,sGimnasio* cupo);
 
 //
