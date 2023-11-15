@@ -21,7 +21,7 @@ bool CrearlistaClases(ifstream* archi, sClases* cla);
 void guardarcliente(fstream &Archivo,sClientes cli);
 void resize_cli(sClientes*& lista, int &n);
 sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n );
-bool LeerArchivoClientes(ifstream* archivo,sClientes *lista,int n);
+bool LeerArchivoClientes(ifstream* archivo,sClientes *lista,int &n);
 bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N);
 
 //Gimnasio

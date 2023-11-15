@@ -11,7 +11,7 @@ void resize_cli(sClientes*& lista, int &n){
     lista=aux;
 }
 
-bool LeerArchivoClientes(ifstream* archicli,sClientes *list,int n){
+bool LeerArchivoClientes(ifstream* archicli,sClientes *list,int &n){
     if (!archicli->is_open())
         return false;
 
