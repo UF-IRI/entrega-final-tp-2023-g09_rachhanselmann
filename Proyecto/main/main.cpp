@@ -43,6 +43,29 @@ int main() {
     ofstream Clientes;
     ofstream Asistencia;
 
+    int opcion=0;
+
+    //Hacer la funcion de menu principal
+
+    do{
+        cout<<"Ingrese la opcion del menu principal:"<<endl;
+        cin>>opcion;
+
+        switch(opcion)
+        {
+        case (1):
+            system("cls");
+            InscripcionMusculito();
+            //Habria que ver como asignarle un id dentro del gimnasio
+            break;
+
+        case (2):
+            system("cls");
+            break;
+
+
+        }
+    }while(opcion!=4);
 
 
 

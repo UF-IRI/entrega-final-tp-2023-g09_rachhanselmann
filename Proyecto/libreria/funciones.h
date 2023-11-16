@@ -1,36 +1,44 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
+
 #include "clientes.h"
 #include "gimnasio.h"
+
 #include <fstream>
-#include  <string>
-#include<iostream>
+#include <string>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 
 using namespace std;
 
 
 
-//funciones para las clases
-void reserva(sClientes cli, unsigned int IDclase);
-//void cancelacion(sClientes cli, Class claseelegida);
-//void cambiosenreserva(sClientes cli, Class clasevieja, Class clasenueva);
-void guardarClase(fstream& archivo, sGimnasio gym);
-bool CrearlistaClases(ifstream* archi, sClases* cla);
+//todas las funciones
 
 //clientes
-void guardarcliente(fstream &Archivo,sClientes cli);
 void resize_cli(sClientes*& lista, int &n);
 sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n );
-bool LeerArchivoClientes(ifstream* archivo,sClientes *lista,int &n);
 bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N);
 
-//Gimnasio
-bool LeerArchivoGym(ifstream* archigym,sGimnasio *list,int &n);
-bool escribirasistencia(ofstream* archiasist,sGimnasio* cupo);//binario
-bool leerasistencia(ifstream* archiasist,sGimnasio* cupo);
+//clases
+void resize_clase(sClases*& lista, int &n);
+sClases* LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n);
+bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N);
 
-void InscripcionMusculito(bool resul);
-//
+
+//Gimnasio
+bool leerasistencia(ifstream* archiasist,sAsistencia* cupo);//binario
+bool binariolista(ifstream archi);
+bool escribirasistencia(ofstream* archiasist,sAsistencia* cupo);
+
+//Funciones extra
+time_t fechaInscripcion();
+void InscripcionMusculito();
+void reserva(string id_clase, sAsistencia*listaasis);
+void verificar_cupos(sAsistencia* list, string cupos_tot, string id);
+
 
 
 

@@ -11,58 +11,6 @@ void resize_cli(sClientes*& lista, int &n){
     lista=aux;
 }
 
-bool LeerArchivoClientes(ifstream* archicli,sClientes *list,int &n){
-    if (!archicli->is_open())
-        return false;
-
-    string header;
-    getline(*archicli,header);
-
-    string auxnombre, auxapellido, auxmail;
-    unsigned int auxiD, auxnumero_telefono;
-    int auxestado; // 0=todo pago, positivo= dinero a favor, negativo=debe dinero
-    tm auxfecha_nac;
-    char coma=',';
-    int i=0;
-
-    while(*archicli>>auxiD>>coma>>auxnombre>>coma>>auxapellido>>coma>>auxmail>>coma>>auxnumero_telefono>>coma>>auxfecha_nac>>>coma>>auxestado){
-
-        resize_cli(list,n);
-
-        (list+i)->iD=auxiD;
-        (list+i)->nombre=auxnombre;
-        (list+i)->apellido=auxapellido;
-        (list+i)->mail=auxmail;
-        (list+i)->numero_telefono=auxnumero_telefono;
-        (list+i)->fecha_nac=auxfecha_nac;
-        (list+i)->estado=auxestado;
-        i++;
-
-    }
-        return true;
-
-}
-
-
-bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N){
-    if(!archicli->is_open())
-        return false;
-
-    char coma=',';
-    string header;
-
-    //getline(archicli, header);
-
-    if(header=="")
-        *archicli<<"iDcliente"<<coma<<"nombre"<<coma<<"apellido"<<coma<<"email"<<coma<<"telefono"<<coma<<"fechaNac"<<coma<<"estado"<<endl;
-
-
-    for(int i=0;i<N;i++){
-        *archicli<<listacli[i].iD<<coma<<listacli[i].nombre<<coma<<listacli[i].apellido<<coma<<listacli[i].mail<<coma<<listacli[i].numero_telefono<<coma<<listacli[i].fecha_nac<<coma<<listacli[i].estado<<endl;
-
-    }
-    return true;
-}
 
 sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
 
@@ -91,15 +39,27 @@ sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
 
 }
 
-bool AgregarClienteLista(sClientes*lista,int n){
+
+bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N){
+    if(!archicli->is_open())
+        return false;
+
+    char coma=',';
+    string header;
+
+    //getline(archicli, header);
+
+    if(header=="")
+        *archicli<<"iDcliente"<<coma<<"nombre"<<coma<<"apellido"<<coma<<"email"<<coma<<"telefono"<<coma<<"fechaNac"<<coma<<"estado"<<endl;
 
 
+    for(int i=0;i<N;i++){
+        *archicli<<listacli[i].iD<<coma<<listacli[i].nombre<<coma<<listacli[i].apellido<<coma<<listacli[i].mail<<coma<<listacli[i].numero_telefono<<coma<<listacli[i].fecha_nac<<coma<<listacli[i].estado<<endl;
 
-
-
-
-
+    }
+    return true;
 }
+
 
 //funciones gimnasio
 
@@ -112,42 +72,52 @@ void resize_clase(sClases*& lista, int &n){
     lista=aux;
 }
 
-bool LeerArchivoGym(ifstream* archigym,sClases *list,int &n){
-    if (!archigym->is_open())
-        return false;
 
-    string header;
-    getline(*archigym,header);
+sClases* LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n)
+{
+    if(!archivo->is_open() || lista==nullptr)
+        return nullptr;
 
-    string auxIDclase;
-    string auxnombre;
-    time_t auxhorario;
+    sClases* nuevalista= new sClases[n];
     char coma=',';
     int i=0;
-    while(*archigym>>auxIDclase>>coma>>auxnombre>>coma>>auxhorario){
-        resize_clase(list,n);
-        (list+i)->IDclase=auxIDclase;
-        (list+i)->nombre=auxnombre;
-        (list+i)->horario=auxhorario;
+
+    while(*archivo>>nuevalista[i].IDclase>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].horario){
+
+        resize_cli(lista,n);
+
+        (lista+i)->iDclase=nuevalista->iDclase;
+        (lista+i)->nombre=nuevalista->nombre;
+        (lista+i)->horario=nuevalista->horario;
         i++;
-        return true;
     }
+    delete[]lista ;
+    return nuevalista;
+}
 
-}//falta terminar, nose como hacer bien el leer
-
-bool escribirasistencia(ofstream* archiasist,sAsistencia* cupo){
-
-    if(!archiasist->is_open())
+bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N)
+{
+    if(!archivo->is_open())
         return false;
 
+    char coma=',';
+    string header;
 
-    archiasist->write((char*)cupo,sizeof(sAsistencia));//hay que ver como poner cada uno o si ya asi se pone todo lo que se necesita para la reserva
+    //getline(archivo, header);
 
+    if(header=="")
+        *archivo<<"iDclase"<<coma<<"nombre"<<coma<<"horario"<<endl;
+
+
+    for(int i=0;i<N;i++){
+        *archivo<<lista[i].IDclase<<coma<<lista[i].nombre<<coma<<lista[i].horario<<endl;
+
+    }
     return true;
 }
 
-bool leerasistencia(ifstream* archiasist,sAsistencia* cupo,int &n){
 
+bool leerasistencia(ifstream* archiasist,sAsistencia* cupo){
     if(!archiasist->is_open())
         return false;
 
@@ -158,13 +128,68 @@ bool leerasistencia(ifstream* archiasist,sAsistencia* cupo,int &n){
 
 }
 
+bool binariolista(ifstream archi) {
+    if (!archi->is_open())
+        return false;
 
-//funcion time, reservas,
-void fechaInscripcion( ){
+    int cantLineas = 0;
+    string linea;
 
+    while (getline(archi, linea)) {
+        cantLineas++;
+    }
+
+    sAsistencia lineasArray = new sAsistencia[cantLineas];
+
+    for (int i = 0; i < cantLineas; ++i) {
+        getline(*archi, lineasArray[i]);
+    }
+
+    return true;
+}//el delete se hace en el main despues de dejar de usar la variable;
+
+
+bool escribirasistencia(ofstream* archiasist,sAsistencia* cupo){
+
+    if(!archiasist->is_open())
+        return false;
+
+
+    archiasist->write((char*)cupo,sizeof(sAsistencia));
+    return true;
 }
 
-void InscripcionMusculito(bool resul)
+
+//funcion para musculito
+time_t fechaInscripcion(){
+
+    srand(time(0));
+
+    time_t fechaInscripcion;
+    tm *ltm;
+
+    do{
+        time_t now = time(0);
+        tm *ltm = localtime(&now);
+
+
+
+        // Generar una hora aleatoria entre 8:00 AM y 8:00 PM
+        ltm->tm_hour = rand() % 12 + 8;  // Hora entre 8 y 19
+        ltm->tm_min = rand() % 60;       // Minuto entre 0 y 59
+        ltm->tm_sec = rand() % 60;       // Segundo entre 0 y 59
+
+        // Convertir la estructura tm a time_t
+        time_t fechaInscripcion = mktime(ltm);
+
+    }while (ltm->tm_wday < 1 || ltm->tm_wday > 5);
+
+    return fechaInscripcion;
+}
+
+
+
+void InscripcionMusculito()
 {
     //bool para chequear en el main si es que la persona tiene un id generado o no
     cout<<"Ingrese su nombre:"<<endl;
@@ -173,28 +198,89 @@ void InscripcionMusculito(bool resul)
     cin>>sClientes.apellido;
     cout<<"Ingrese su mail:"<<endl;
     cin>>sClientes.mail;
-    cout<<"Ingrese su telefono:"<<endl;
-    cin>>sClientes.numero_telefono;
-    cout<<"Ingrese su año de nacimiento:"<<endl;
+   cout<<"Ingrese su telefono:"<<endl;
+   cin>>sClientes.numero_telefono;
+   cout<<"Ingrese su año de nacimiento:"<<endl;
     cin>>sClientes.fecha_nac.anio;
-    cout<<"Ingrese su mes de nacimiento:"<<endl;
-    cin>>sClientes.fecha_nac.mes;
-    cout<<"Ingrese su dia de nacimiento:"<<endl;
-    cin>>sClientes.fecha_nac.dia;
+   cout<<"Ingrese su mes de nacimiento:"<<endl;
+   cin>>sClientes.fecha_nac.mes;
+   cout<<"Ingrese su dia de nacimiento:"<<endl;
+   cin>>sClientes.fecha_nac.dia;
   //Habria que generarle el ID al cliente y el estado del pago deberiamos de encargarnos nosotros tambien, osea agregarlo a una lista asi el id del cliente sigue el orden y devolver esos datos
 }
 
+void reserva(string id_clase, sAsistencia*listaasis){
+  int cupmax=0;
 
-//funciones: bool reservas->parametros (lista archivo binario, lista de clases) recorrer las lista del binario y hacer un if que la lista del binario sea igual que la de la clase usamos un contador++
-//
-//funcion: pedir datos del cliente y despues llamar a generar reserva
-//
-//funcion por separado para llamar a las distintas clases por su id y horario (con el cupo =cupo-34->primer turno)
-//
+    if(id_clase>=1 && id_clase<=5){
+        cupmax=45;
+        verificar_cupos(listaasis, cupmax, id_clase);
+    }
+
+    else if(id_clase>5 && id_clase<12){
+         cupmax=25;
+         verificar_cupos(listaasis, cupmax, id_clase);
+
+    }
+
+    else if(id_clase>11 && id_clase<18){
+        cupmax=15;
+        verificar_cupos(listaasis, cupmax, id_clase);
+
+    }
+
+    else if(id_clase>17 && id_clase<24){
+         cupmax=40;
+         verificar_cupos(listaasis, cupmax, id_clase);
+
+    }
+
+    else if(id_clase>23 && id_clase<30){
+         cupmax=50;
+         verificar_cupos(listaasis, cupmax, id_clase);
+
+    }
+
+    else if(id_clase>29 && id_clase<34){
+       cupmax=30;
+       verificar_cupos(listaasis, cupmax, id_clase);
+
+    }
+
+    else if(id_clase>33 && id_clase<61){
+        cupmax=30;
+        verificar_cupos(listaasis, cupmax, id_clase);
+    }
+
+}
+
+void verificar_cupos(sAsistencia* list, string cupos_tot, string id){
+
+    int j=0;
+
+    for(int i=0; i<sizeof(list); i++){
+
+        list->CursosInscriptos->iDCurso[i]=id;
+        j=i;
+    }
+
+
+
+    if(list->cantInscriptos[j]<cupos_tot){
+        (list->cantInscriptos[j])+=1;
+        return true;
+    }
+    else if(){
+            return false;
+
+        }
+}
+
+
+
+
 //terminar el main, abrir y cerrar archivos, menu,
-//pedir id de cliente si esta anotado en un if y directo al menu
 // testings
 //como sumar los archivos al programa para poder usarlos
-//leer y escribir funcion clientes
 // fijar si hay que hacer + funciones extras a archivos
 // lunes a sabados!!
