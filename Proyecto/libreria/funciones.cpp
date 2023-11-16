@@ -142,15 +142,17 @@ sAsistencia* binariolista(ifstream*archi) {
 
     int cantLineas = 0;
     string linea;
-
+    int i=0;
     while (getline(*archi, linea)) {
         cantLineas=linea[i];
+        i++;
     }
 
-    sAsistencia lineasArray = new sAsistencia[cantLineas];
+    sAsistencia* lineasArray = new sAsistencia[cantLineas];
 
     for (int i = 0; i < cantLineas; ++i) {
         getline(*archi, lineasArray[i]);
+
     }
 
     return lineasArray;
@@ -235,6 +237,25 @@ string InscripcionMusculito(sClientes*lista, int&n)
     return posCliente;
 
 }
+bool verificar_cupos(sAsistencia* list,sAsistencia cupos_tot, sAsistencia asis){
+
+    int j=0;
+    //sAsistencia nuevoInscripto;
+
+    for(unsigned int i=0; i<sizeof(list); i++){
+
+        list[i].CursosInscriptos->iDCurso=asis.iDCliente;
+        j=i;
+    }
+
+    if(list[j].cantInscriptos<cupos_tot){
+        // (*list->cantInscriptos[j])+=1;
+
+        return true;
+    }
+
+    return false;
+}
 
 bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n){
     unsigned int cupmax=0;
@@ -294,25 +315,7 @@ bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n){
 
 }
 
-bool verificar_cupos(sAsistencia* list, unsigned int cupos_tot, sAsistencia asis){
 
-    int j=0;
-    //sAsistencia nuevoInscripto;
-
-    for(int i=0; i<sizeof(list); i++){
-
-        list[i].CursosInscriptos->iDCurso=asis.iDCliente;
-        j=i;
-    }
-
-    if(list[j].cantInscriptos<cupos_tot){
-       // (*list->cantInscriptos[j])+=1;
-
-        return true;
-    }
-
-    return false;
-}
 
 void MenuPrincipal()
 {

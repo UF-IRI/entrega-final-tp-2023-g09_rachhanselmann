@@ -55,7 +55,7 @@ int main() {
         {
         case (1):
             system("cls");
-            int IDpersona= InscripcionMusculito(resul2, ncli);
+            string IDpersona= InscripcionMusculito(resul2, ncli);
             cout<<"Se ha registrado con exito. Su ID generado es:"<<IDpersona<<endl;
             break;
 

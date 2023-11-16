@@ -63,7 +63,7 @@ TEST_CASE("Eliminar repetidos de la lista de asistencia") {
     sInscripcion curso2 = {2, {21, 9, 321, 40}};
     sInscripcion curso3 = {3, {4, 1, 320, 37}};
 
-    sAsistencia listaAsistencia[0] = {123, 1, &curso1};
+    sAsistencia listaAsistencia[0] = {123 1, &curso1};
     sAsistencia listaAsistencia[1]= {456, 2, &curso2};
     sAsistencia listaAsistencia[2]= {789, 3, &curso3};
     sAsistencia listaAsistencia[3]= {123, 1, &curso1};  // Repetido
