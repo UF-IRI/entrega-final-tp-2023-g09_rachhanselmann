@@ -29,15 +29,16 @@ bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N);
 
 
 //Gimnasio
-bool leerasistencia(ifstream* archiasist,sAsistencia* cupo);//binario
-bool binariolista(ifstream archi);
-bool escribirasistencia(ofstream* archiasist,sAsistencia* cupo);
+bool LeerAsistencia(ifstream* archiasist,sAsistencia* cupo);//binario
+sAsistencia* binariolista(ifstream archi);
+bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
 
 //Funciones extra
 time_t fechaInscripcion();
-void InscripcionMusculito();
-void reserva(string id_clase, sAsistencia*listaasis);
-void verificar_cupos(sAsistencia* list, string cupos_tot, string id);
+int InscripcionMusculito(sClientes*lista, int&n);
+bool reserva(string id_clase, sAsistencia*listaasis);
+bool verificar_cupos(sAsistencia* list, string cupos_tot, string id);
+void MenuPrincipal();
 
 
 

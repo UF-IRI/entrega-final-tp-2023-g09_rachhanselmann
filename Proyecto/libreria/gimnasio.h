@@ -51,7 +51,7 @@ struct asistencia{
 
 
 //struct cupos{
-//    unsigned int cupos_tot;
+//  unsigned int cupos_tot;
 //};typedef struct cupos sCupos;
 
 
