@@ -10,10 +10,7 @@
 #include <cstdlib>
 #include <ctime>
 
-
 using namespace std;
-
-
 
 //todas las funciones
 
@@ -35,11 +32,11 @@ bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
 
 //Funciones extra
 time_t fechaInscripcion();
-int InscripcionMusculito(sClientes*lista, int&n);
-bool reserva(string id_clase, sAsistencia*listaasis);
-bool verificar_cupos(sAsistencia* list, string cupos_tot, string id);
+string InscripcionMusculito(sClientes*lista, int&n);
+bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n);
+bool verificar_cupos(sAsistencia* list, unsigned int cupos_tot, sAsistencia asis);
 void MenuPrincipal();
-
+sAsistencia* eliminarrepetidos(sAsistencia* lista, int& n);
 
 
 

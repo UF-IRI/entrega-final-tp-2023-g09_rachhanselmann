@@ -20,6 +20,5 @@ struct Cliente{
 };
 typedef struct Cliente sClientes;
 
-//bool LeerArchivoClientes(ifstream* archivo,sClientes *lista,int &n);
 
 #endif // CLIENTES_H

@@ -21,7 +21,7 @@ sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
     char coma=',';
     int i=0;
 
-    while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].fecha_nac>>coma>>nuevalista[i].estado){
+    while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].fecha_nac.dia>>nuevalista[i].fecha_nac.mes>>nuevalista[i].fecha_nac.anio>>coma>>nuevalista[i].estado){
 
         resize_cli(lista,n);
         (lista+i)->iD=nuevalista->iD;
@@ -54,7 +54,7 @@ bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N){
 
 
     for(int i=0;i<N;i++){
-        *archicli<<listacli[i].iD<<coma<<listacli[i].nombre<<coma<<listacli[i].apellido<<coma<<listacli[i].mail<<coma<<listacli[i].numero_telefono<<coma<<listacli[i].fecha_nac<<coma<<listacli[i].estado<<endl;
+        *archicli<<listacli[i].iD<<coma<<listacli[i].nombre<<coma<<listacli[i].apellido<<coma<<listacli[i].mail<<coma<<listacli[i].numero_telefono<<coma<<listacli[i].fecha_nac.dia<<listacli[i].fecha_nac.mes<<listacli[i].fecha_nac.anio<<coma<<listacli[i].estado<<endl;
 
     }
     return true;
@@ -73,7 +73,7 @@ void resize_clase(sClases*& lista, int &n){
 }
 
 
-sClases* LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n)
+sClases* LeerArchivoClasesaLista(ifstream* archivo,sClases *&lista,int &n)
 {
     if(!archivo->is_open() || lista==nullptr)
         return nullptr;
@@ -84,14 +84,14 @@ sClases* LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n)
 
     while(*archivo>>nuevalista[i].IDclase>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].horario){
 
-        resize_cli(lista,n);
+        resize_clase(lista,n);
 
-        (lista+i)->iDclase=nuevalista->iDclase;
+        (lista+i)->IDclase=nuevalista->IDclase;
         (lista+i)->nombre=nuevalista->nombre;
         (lista+i)->horario=nuevalista->horario;
         i++;
     }
-    delete[]lista ;
+    delete[]lista;
     return nuevalista;
 }
 
@@ -116,6 +116,14 @@ bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N)
     return true;
 }
 
+void resize_asis(sAsistencia*& lista, int &n){
+    n=(n)+1;
+    sAsistencia *aux=new sAsistencia[n];
+    for(int i=0;i<n-1;i++){
+        aux[i]=lista[i];}
+    delete[] lista;
+    lista=aux;
+}
 
 bool LeerAsistencia(ifstream* archiasist,sAsistencia* cupo){
     if(!archiasist->is_open())
@@ -128,15 +136,15 @@ bool LeerAsistencia(ifstream* archiasist,sAsistencia* cupo){
 
 }
 
-sAsistencia* binariolista(ifstream archi) {
+sAsistencia* binariolista(ifstream*archi) {
     if (!archi->is_open())
         return nullptr;
 
     int cantLineas = 0;
     string linea;
 
-    while (getline(archi, linea)) {
-        cantLineas++;
+    while (getline(*archi, linea)) {
+        cantLineas=linea[i];
     }
 
     sAsistencia lineasArray = new sAsistencia[cantLineas];
@@ -189,7 +197,7 @@ time_t fechaInscripcion(){
 
 
 
-int InscripcionMusculito(sClientes*lista, int&n)
+string InscripcionMusculito(sClientes*lista, int&n)
 {
     sClientes nuevoCliente;
 
@@ -216,7 +224,7 @@ int InscripcionMusculito(sClientes*lista, int&n)
         ultimaLinea = lineaActual;
     }
 
-    int posCliente=ultimaLinea.iD;
+    string posCliente=ultimaLinea.iD;
     posCliente+=1;
     nuevoCliente.iD=posCliente;
     nuevoCliente.estado=0; //lo igualamos a cero porque en cuanto te inscribis pagas tu primer mes
@@ -228,70 +236,76 @@ int InscripcionMusculito(sClientes*lista, int&n)
 
 }
 
-bool reserva(string id_clase, sAsistencia*listaasis){
-    int cupmax=0;
+bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n){
+    unsigned int cupmax=0;
     bool resul=false;
 
-    if(id_clase>=1 && id_clase<=5){
+    if(nuevocliente.CursosInscriptos->iDCurso>=1 && nuevocliente.CursosInscriptos->iDCurso<=5){
         cupmax=45;
-        resul=verificar_cupos(listaasis, cupmax, id_clase);
+        resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
     }
 
-    else if(id_clase>5 && id_clase<12){
+    else if(nuevocliente.CursosInscriptos->iDCurso>5 && nuevocliente.CursosInscriptos->iDCurso<12){
          cupmax=25;
-         resul=verificar_cupos(listaasis, cupmax, id_clase);
+         resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
 
     }
 
-    else if(id_clase>11 && id_clase<18){
+    else if(nuevocliente.CursosInscriptos->iDCurso>11 && nuevocliente.CursosInscriptos->iDCurso<18){
         cupmax=15;
-        resul=verificar_cupos(listaasis, cupmax, id_clase);
+        resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
 
     }
 
-    else if(id_clase>17 && id_clase<24){
+    else if(nuevocliente.CursosInscriptos->iDCurso>17 && nuevocliente.CursosInscriptos->iDCurso<24){
          cupmax=40;
-         resul=verificar_cupos(listaasis, cupmax, id_clase);
+         resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
 
     }
 
-    else if(id_clase>23 && id_clase<30){
+    else if(nuevocliente.CursosInscriptos->iDCurso>23 && nuevocliente.CursosInscriptos->iDCurso<30){
          cupmax=50;
-         resul=verificar_cupos(listaasis, cupmax, id_clase);
+         resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
 
     }
 
-    else if(id_clase>29 && id_clase<34){
+    else if(nuevocliente.CursosInscriptos->iDCurso>29 && nuevocliente.CursosInscriptos->iDCurso<34){
        cupmax=30;
-       resul=verificar_cupos(listaasis, cupmax, id_clase);
+       resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
 
     }
 
-    else if(id_clase>33 && id_clase<61){
+    else if(nuevocliente.CursosInscriptos->iDCurso>33 && nuevocliente.CursosInscriptos->iDCurso<61){
         cupmax=30;
-        resul=verificar_cupos(listaasis, cupmax, id_clase);
+        resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
     }
+
+
 
     if(resul==true)
+    {
+        resize_asis(listaasis, n);
+        listaasis[n]=nuevocliente;
         return true;
+    }
 
 
         return false;
 
 }
 
-bool verificar_cupos(sAsistencia* list, string cupos_tot, string id){
+bool verificar_cupos(sAsistencia* list, unsigned int cupos_tot, sAsistencia asis){
 
     int j=0;
     //sAsistencia nuevoInscripto;
 
     for(int i=0; i<sizeof(list); i++){
 
-        list->CursosInscriptos->iDCurso[i]=id;
+        list[i].CursosInscriptos->iDCurso=asis.iDCliente;
         j=i;
     }
 
-    if(list->cantInscriptos[j]<cupos_tot){
+    if(list[j].cantInscriptos<cupos_tot){
        // (*list->cantInscriptos[j])+=1;
 
         return true;
@@ -302,22 +316,26 @@ bool verificar_cupos(sAsistencia* list, string cupos_tot, string id){
 
 void MenuPrincipal()
 {
-
     cout << "\n\n\t\t\tMENU PRINCIPAL" << endl;
     cout << "\t\t\t--------------" << endl;
     cout << "\t1. Inscribirme en Musculito" << endl;
-    cout << "\t2. " << endl;
-    cout << "\t3. " << endl;
+    cout << "\t2. Reserva cupo clase" << endl;
     cout << "\t0. Salir"<<endl;
+}
 
-
+sAsistencia* eliminarrepetidos(sAsistencia* lista, int& n) {
+    int i, j;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (i != j && lista[i].iDCliente == lista[j].iDCliente && lista[i].CursosInscriptos->iDCurso == lista[j].CursosInscriptos->iDCurso) {
+                for (int k = i; k < n - 1; k++) {
+                    lista[k] = lista[k + 1];
+                }
+                n--;
+            }
+        }
+    }
+    return lista;
 }
 
 
-
-
-//terminar el main, abrir y cerrar archivos, menu,
-// testings
-//como sumar los archivos al programa para poder usarlos
-// fijar si hay que hacer + funciones extras a archivos
-// lunes a sabados!!
