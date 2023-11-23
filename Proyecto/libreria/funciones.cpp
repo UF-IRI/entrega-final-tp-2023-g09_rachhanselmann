@@ -169,6 +169,30 @@ bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo){
     return true;
 }
 
+bool EscribirAsismañana(ofstream* archi, sAsistencia* asis)
+{
+    //ofstream archi("archivo_nuevo.dat");
+
+    if(!archi->is_open())
+        return false;
+
+
+     for (int i=0; i<asis->cantInscriptos; i++) {//DECIA CANTASISTENCIAS no sabemos a que se refiere a cant del array o cantinscriptos por curso
+
+        archi->write((char*)&asis[i].iDCliente, sizeof(int));
+        archi->write((char*)&asis[i].cantInscriptos, sizeof(int));
+
+
+              for(unsigned int j = 0; j < asis[i].cantInscriptos; j++)
+              {
+                archi->write((char*)&asis[i].CursosInscriptos[j],sizeof(sInscripcion));
+              }
+     }
+
+    archi->close();
+    return true;
+}
+
 
 //funcion para musculito
 time_t fechaInscripcion(){
@@ -237,7 +261,7 @@ string InscripcionMusculito(sClientes*lista, int&n)
     return posCliente;
 
 }
-bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos cupotot){//, sAsistencia asis
+bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos*cupotot){//, sAsistencia asis
 
     unsigned int j=0;
     //sAsistencia nuevoInscripto;
@@ -251,7 +275,7 @@ bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos cupotot){//, sAsi
 
     }
 
-    if(list[j].cantInscriptos < cupotot.cupos_tot){
+    if(list[j].cantInscriptos < cupotot->cupos_tot){
 
        // (*list->cantInscriptos[j])+=1;
 
@@ -261,47 +285,47 @@ bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos cupotot){//, sAsi
     return false;
 }
 
-bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases,sCupos* cups){
+bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n, sClases*clases, sCupos* cups){
 
     bool resul=false;
 
     if(nuevocliente.CursosInscriptos->iDCurso>=1 && nuevocliente.CursosInscriptos->iDCurso<=5){
         cups->cupos_tot=45;
-        resul=verificar_cupos(listaasis,clases,cups->cupos_tot);
+        resul=verificar_cupos(listaasis,clases,cups);
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>5 && nuevocliente.CursosInscriptos->iDCurso<12){
          cups->cupos_tot=25;
-        resul=verificar_cupos(listaasis,clases,cupmax);
+        resul=verificar_cupos(listaasis,clases,cups);
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>11 && nuevocliente.CursosInscriptos->iDCurso<18){
         cups->cupos_tot=15;
-        resul=verificar_cupos(listaasis,clases,cupmax);
+        resul=verificar_cupos(listaasis,clases,cups);
 
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>17 && nuevocliente.CursosInscriptos->iDCurso<24){
         cups->cupos_tot=40;
-         resul=verificar_cupos(listaasis,clases,cupmax);
+         resul=verificar_cupos(listaasis,clases,cups);
 
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>23 && nuevocliente.CursosInscriptos->iDCurso<30){
          cups->cupos_tot=50;
-         resul=verificar_cupos(listaasis,clases,cupmax);
+         resul=verificar_cupos(listaasis,clases,cups);
 
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>29 && nuevocliente.CursosInscriptos->iDCurso<34){
        cups->cupos_tot=30;
-       resul=verificar_cupos(listaasis,clases,cupmax);
+       resul=verificar_cupos(listaasis,clases,cups);
 
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>33 && nuevocliente.CursosInscriptos->iDCurso<61){
         cups->cupos_tot=30;
-        resul=verificar_cupos(listaasis,clases,cupmax);
+        resul=verificar_cupos(listaasis,clases,cups);
     }
 
 

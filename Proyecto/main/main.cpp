@@ -31,7 +31,7 @@ int main() {
     archiAsis.open("asistencias_1697673600000.dat");
     int nasi=-1;
     sAsistencia* listaasis1=new sAsistencia[nasi];
-    //falta el resize
+    //falta resize
     sAsistencia* resul3=binariolista(*archiAsis);
     archiAsis.close();
     delete[] listaasis1;
@@ -64,12 +64,11 @@ int main() {
     sClientes* listanuevacli=new sClientes[n];
     sCupos* cuponuevo=new sCupos[1];
 
+    sInscripcion inscrip{12, {23, 4, 322, 23}};
+    sAsistencia asist{7, 11, {inscrip}};
+
     sInscripcion* insc=new sInscripcion{11, {23, 4, 323, 20}};
     sAsistencia* nuevocli= new sAsistencia{6, 10, {insc}};
-    sInscripcion inscrip={12, {23, 4, 322, 23}};
-    sAsistencia asist={7, 11, {inscrip}};
-
-
 
 
 
@@ -92,7 +91,7 @@ int main() {
         case (2):
         {
             system("cls");
-//sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases,sCupos* cups
+
             bool res=reserva(asist, listanuevaasis, n, listanuevacla, cuponuevo);
             if(res==true)
             {
@@ -107,6 +106,13 @@ int main() {
         }
     }while(opcion!=0);
 
+
+    listanuevaasis=eliminarrepetidos(listanuevaasis, n);
+
+    ofstream archi("archivo_nuevo.dat", ios::binary);
+    bool ult=EscribirAsismañana(&archi, listanuevaasis);
+    cout<<ult;
+    delete[]listanuevaasis;
 
 
 
