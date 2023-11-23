@@ -42,8 +42,8 @@ int main() {
 
     int opcion=0;
 
-    sInscripcion* insc={11, {23, 4, 323, 20}};
-    sAsistencia nuevocli={6, 10, {insc}};
+    sInscripcion* insc=new sInscripcion{11, {23, 4, 323, 20}};
+    sAsistencia* nuevocli= new sAsistencia{6, 10, {insc}};
 
     MenuPrincipal();
 

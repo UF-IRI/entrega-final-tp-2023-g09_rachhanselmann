@@ -50,10 +50,9 @@ struct asistencia{
 };typedef asistencia sAsistencia;
 
 
-//struct cupos{
-//  unsigned int cupos_tot;
-//};typedef struct cupos sCupos;
-
+struct cupos{
+  unsigned int cupos_tot;
+};typedef struct cupos sCupos;
 
 
 #endif // GIMNASIO_H

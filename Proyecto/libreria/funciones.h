@@ -33,8 +33,8 @@ bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
 //Funciones extra
 time_t fechaInscripcion();
 string InscripcionMusculito(sClientes*lista, int&n);
-bool verificar_cupos(sAsistencia* list, unsigned int cupos_tot, sAsistencia asis);
-bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n);
+bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos cupotot);
+bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases);
 
 void MenuPrincipal();
 sAsistencia* eliminarrepetidos(sAsistencia* lista, int& n);

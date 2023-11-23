@@ -237,19 +237,23 @@ string InscripcionMusculito(sClientes*lista, int&n)
     return posCliente;
 
 }
-bool verificar_cupos(sAsistencia* list,sAsistencia cupos_tot, sAsistencia asis){
+bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos cupotot){//, sAsistencia asis
 
     int j=0;
     //sAsistencia nuevoInscripto;
 
-    for(unsigned int i=0; i<sizeof(list); i++){
+    for(int i=0; i<sizeof(list); i++){
 
-        list[i].CursosInscriptos->iDCurso=asis.iDCliente;
-        j=i;
+       if(list[i].CursosInscriptos->iDCurso ==clases->IDclase)
+        {
+           j=i;
+        }
+
     }
 
-    if(list[j].cantInscriptos<cupos_tot){
-        // (*list->cantInscriptos[j])+=1;
+    if(list[j].cantInscriptos < cupotot){
+
+       // (*list->cantInscriptos[j])+=1;
 
         return true;
     }
@@ -257,48 +261,47 @@ bool verificar_cupos(sAsistencia* list,sAsistencia cupos_tot, sAsistencia asis){
     return false;
 }
 
-bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n){
-    unsigned int cupmax=0;
+bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases){
+    sCupos*cupmax=0;
     bool resul=false;
 
     if(nuevocliente.CursosInscriptos->iDCurso>=1 && nuevocliente.CursosInscriptos->iDCurso<=5){
         cupmax=45;
-        resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
+        resul=verificar_cupos(listaasis,clases,cupmax);
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>5 && nuevocliente.CursosInscriptos->iDCurso<12){
          cupmax=25;
-         resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
-
+        resul=verificar_cupos(listaasis,clases,cupmax);
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>11 && nuevocliente.CursosInscriptos->iDCurso<18){
         cupmax=15;
-        resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
+        resul=verificar_cupos(listaasis,clases,cupmax);
 
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>17 && nuevocliente.CursosInscriptos->iDCurso<24){
          cupmax=40;
-         resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
+         resul=verificar_cupos(listaasis,clases,cupmax);
 
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>23 && nuevocliente.CursosInscriptos->iDCurso<30){
          cupmax=50;
-         resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
+         resul=verificar_cupos(listaasis,clases,cupmax);
 
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>29 && nuevocliente.CursosInscriptos->iDCurso<34){
        cupmax=30;
-       resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
+       resul=verificar_cupos(listaasis,clases,cupmax);
 
     }
 
     else if(nuevocliente.CursosInscriptos->iDCurso>33 && nuevocliente.CursosInscriptos->iDCurso<61){
         cupmax=30;
-        resul=verificar_cupos(listaasis, cupmax, nuevocliente.CursosInscriptos->iDCurso);
+        resul=verificar_cupos(listaasis,clases,cupmax);
     }
 
 
