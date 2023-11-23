@@ -19,7 +19,6 @@ int main() {
     archiClase.close();
     delete[] listacla1;
 
-
     ifstream archiCli;
     archiCli.open("iriClientesGYM.csv");
     int ncli=-1;
@@ -27,8 +26,6 @@ int main() {
     sClientes* resul2=ClienteLista(*archiCli, listacli1, ncli);
     archiCli.close();
     delete[] listacli1;
-
-
 
     ifstream archiAsis;
     archiAsis.open("asistencias_1697673600000.dat");
@@ -39,15 +36,42 @@ int main() {
     archiAsis.close();
     delete[] listaasis1;
 
+    ofstream Clase;
+    Clase.open("iriClasesGYM.csv");
+    bool salida1=EscribirArchivoClases(&Clase, resul1, ncla);
+    cout<<salida1;
+    Clase.close();
+    delete[] resul1;
+
+    ofstream Clientes;
+    bool salida2=EscribirArchivoClientes(&Clientes, resul2, ncli);
+    cout<<salida2;
+    Clientes.close();
+    delete[] resul2;
+
+    ofstream Asistencia;
+    bool salida3=EscribirAsistencia(&Asistencia, resul3);
+    cout<<salida3;
+    Asistencia.close();
+    delete[] resul3;
+
 
     int opcion=0;
 
+    int n=-1;
+    sAsistencia* listanuevaasis= new sAsistencia[n];
+    sClases* listanuevacla=new sClases[n];
+    sClientes* listanuevacli=new sClientes[n];
+    sCupos* cuponuevo=new sCupos[1];
+
     sInscripcion* insc=new sInscripcion{11, {23, 4, 323, 20}};
     sAsistencia* nuevocli= new sAsistencia{6, 10, {insc}};
+    sInscripcion inscrip={12, {23, 4, 322, 23}};
+    sAsistencia asist={7, 11, {inscrip}};
 
-    int n=0;
-    sAsistencia* listanueva= new sAsistencia[n];
-    sCupos* cuponuevo=new sCupos[1];
+
+
+
 
     MenuPrincipal();
 
@@ -69,7 +93,7 @@ int main() {
         {
             system("cls");
 //sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases,sCupos* cups
-            bool res=reserva(nuevocli,listanueva,n,cuponuevo);
+            bool res=reserva(asist, listanuevaasis, n, listanuevacla, cuponuevo);
             if(res==true)
             {
                 cout<<"La reserva se ha realizado con exito."<<endl;
@@ -85,25 +109,6 @@ int main() {
 
 
 
-
-    ofstream Clase;
-    Clase.open("iriClasesGYM.csv");
-    bool salida1=EscribirArchivoClases(&Clase, resul1, ncla);
-    cout<<salida1;
-    Clase.close();
-    delete[] resul1;
-
-    ofstream Clientes;
-    bool salida2=EscribirArchivoClientes(&Clientes, resul2, ncli);
-    cout<<salida2;
-    Clientes.close();
-    delete[] resul2;
-
-    ofstream Asistencia;
-    bool salida3=EscribirAsistencia(&Asistencia, resul3);
-    cout<<salida3;
-    Asistencia.close();
-    delete[] resul3;
 
     return 0;
 }
