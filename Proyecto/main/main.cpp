@@ -48,9 +48,7 @@ int main() {
 
     int n=-1;
     sAsistencia* listanuevaasis= new sAsistencia[n]; //N WHAT??
-//    sClases* listanuevacla=new sClases[n];
-//    sClientes* listanuevacli=new sClientes[n];
-     sCupos* cuponuevo=new sCupos[n];// N WHAT?
+    sCupos* cuponuevo=new sCupos[n];// N WHAT?
 
     sInscripcion inscrip{12, {23, 4, 322, 23}};
     sAsistencia asist{7, 11, {inscrip}};
