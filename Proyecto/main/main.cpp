@@ -34,42 +34,29 @@ int main() {
     //falta resize
     sAsistencia* resul3=binariolista(*archiAsis);
     archiAsis.close();
-    delete[] listaasis1;
-
-    ofstream Clase;
-    Clase.open("iriClasesGYM.csv");
-    bool salida1=EscribirArchivoClases(&Clase, resul1, ncla);
-    cout<<salida1;
-    Clase.close();
-    delete[] resul1;
-
-    ofstream Clientes;
-    bool salida2=EscribirArchivoClientes(&Clientes, resul2, ncli);
-    cout<<salida2;
-    Clientes.close();
-    delete[] resul2;
+    delete[] listaasis1;    
 
     ofstream Asistencia;
-    bool salida3=EscribirAsistencia(&Asistencia, resul3);
+    bool salida3=binariolista(*Asistencia);
     cout<<salida3;
     Asistencia.close();
     delete[] resul3;
 
 
+
     int opcion=0;
 
     int n=-1;
-    sAsistencia* listanuevaasis= new sAsistencia[n];
-    sClases* listanuevacla=new sClases[n];
-    sClientes* listanuevacli=new sClientes[n];
-    sCupos* cuponuevo=new sCupos[1];
+    sAsistencia* listanuevaasis= new sAsistencia[n]; //N WHAT??
+//    sClases* listanuevacla=new sClases[n];
+//    sClientes* listanuevacli=new sClientes[n];
+     sCupos* cuponuevo=new sCupos[n];// N WHAT?
 
     sInscripcion inscrip{12, {23, 4, 322, 23}};
     sAsistencia asist{7, 11, {inscrip}};
 
-    sInscripcion* insc=new sInscripcion{11, {23, 4, 323, 20}};
-    sAsistencia* nuevocli= new sAsistencia{6, 10, {insc}};
-
+    //sInscripcion* insc=new sInscripcion{11, {23, 4, 323, 20}};
+    //sAsistencia* nuevocli= new sAsistencia{6, 10, {insc}};
 
 
     MenuPrincipal();
@@ -92,7 +79,7 @@ int main() {
         {
             system("cls");
 
-            bool res=reserva(asist, listanuevaasis, n, listanuevacla, cuponuevo);
+            bool res=reserva(asist, listanuevaasis, n, listacla1, cuponuevo);
             if(res==true)
             {
                 cout<<"La reserva se ha realizado con exito."<<endl;
@@ -109,10 +96,24 @@ int main() {
 
     listanuevaasis=eliminarrepetidos(listanuevaasis, n);
 
-    ofstream archi("archivo_nuevo.dat", ios::binary);
-    bool ult=EscribirAsismañana(&archi, listanuevaasis);
+    ofstream archivoes("archivo_nuevo.dat", ios::binary);
+    bool ult=EscribirAsismañana(*archivoes, listanuevaasis);
     cout<<ult;
     delete[]listanuevaasis;
+
+    ofstream Clase;
+    Clase.open("iriClasesGYM.csv");
+    bool salida1=EscribirArchivoClases(&Clase, resul1, ncla);
+    cout<<salida1;
+    Clase.close();
+    delete[] resul1;
+
+    ofstream Clientes;
+    bool salida2=EscribirArchivoClientes(&Clientes, resul2, ncli);
+    cout<<salida2;
+    Clientes.close();
+    delete[] resul2;
+
 
 
 

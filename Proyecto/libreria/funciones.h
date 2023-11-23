@@ -28,7 +28,7 @@ bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N);
 //Gimnasio
 bool LeerAsistencia(ifstream* archiasist,sAsistencia* cupo);//binario
 sAsistencia* binariolista(ifstream archi);
-bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
+//bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
 bool EscribirAsismañana(ifstream* archi, sAsistencia* asis);
 
 //Funciones extra
