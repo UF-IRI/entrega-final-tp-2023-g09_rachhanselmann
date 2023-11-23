@@ -34,7 +34,7 @@ bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
 time_t fechaInscripcion();
 string InscripcionMusculito(sClientes*lista, int&n);
 bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos cupotot);
-bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases);
+bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases,sCupos* cups);
 
 void MenuPrincipal();
 sAsistencia* eliminarrepetidos(sAsistencia* lista, int& n);

@@ -35,7 +35,7 @@ int main() {
     int nasi=-1;
     sAsistencia* listaasis1=new sAsistencia[nasi];
     //falta el resize
-    sAsistencia* resul3=binariolista(&archiAsis);
+    sAsistencia* resul3=binariolista(*archiAsis);
     archiAsis.close();
     delete[] listaasis1;
 
@@ -45,24 +45,31 @@ int main() {
     sInscripcion* insc=new sInscripcion{11, {23, 4, 323, 20}};
     sAsistencia* nuevocli= new sAsistencia{6, 10, {insc}};
 
+    int n=0;
+    sAsistencia* listanueva= new sAsistencia[n];
+    sCupos* cuponuevo=new sCupos[1];
+
     MenuPrincipal();
 
-    do{
+    do {
         cout<<"Ingrese la opcion que desea del menu principal:"<<endl;
         cin>>opcion;
 
         switch(opcion)
         {
         case (1):
+        {
             system("cls");
             string IDpersona= InscripcionMusculito(resul2, ncli);
             cout<<"Se ha registrado con exito. Su ID generado es:"<<IDpersona<<endl;
             break;
+        }
 
         case (2):
+        {
             system("cls");
-
-            bool res=reserva(nuevocli, resul3, ncli);
+//sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases,sCupos* cups
+            bool res=reserva(nuevocli,listanueva,n,cuponuevo);
             if(res==true)
             {
                 cout<<"La reserva se ha realizado con exito."<<endl;
@@ -72,7 +79,7 @@ int main() {
                 cout<<"Hubo un error. Es posible que no haya cupos."<<endl;
             }
             break;
-
+        }
         }
     }while(opcion!=0);
 
@@ -100,3 +107,4 @@ int main() {
 
     return 0;
 }
+

@@ -22,7 +22,7 @@ struct gym{
 
 struct Clases{
 
-    string IDclase;
+    unsigned int IDclase;
     string nombre;
     string horario;
 
