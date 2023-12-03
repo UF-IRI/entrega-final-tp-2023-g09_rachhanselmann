@@ -16,20 +16,20 @@ using namespace std;
 
 //clientes
 void resize_cli(sClientes*& lista, int &n);
-sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n );
+void ClienteLista(ifstream *archicli,sClientes*&lista,int &n );
 bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N);
 
 //clases
 void resize_clase(sClases*& lista, int &n);
-sClases* LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n);
+void LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n);
 bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N);
 
 
 //Gimnasio
 bool LeerAsistencia(ifstream* archiasist,sAsistencia* cupo);//binario
-sAsistencia* binariolista(ifstream archi);
+void binariolista(ifstream* archi);
 //bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
-bool EscribirAsismañana(ifstream* archi, sAsistencia* asis);
+bool EscribirAsismañana(ofstream* archi, sAsistencia* asis);
 
 //Funciones extra
 time_t fechaInscripcion();

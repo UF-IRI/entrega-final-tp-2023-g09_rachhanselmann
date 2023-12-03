@@ -12,10 +12,10 @@ void resize_cli(sClientes*& lista, int &n){
 }
 
 
-sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
+void ClienteLista(ifstream *&archicli,sClientes*lista,int &n ){
 
     if(!archicli->is_open() || lista==nullptr)
-        return nullptr;
+        return;
 
     sClientes* nuevalista= new sClientes[n];
     char coma=',';
@@ -34,8 +34,7 @@ sClientes* ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
 
         i++;
     }
-    delete[]lista ;
-    return nuevalista;
+    //delete[]lista ;
 
 }
 
@@ -72,17 +71,16 @@ void resize_clase(sClases*& lista, int &n){
     lista=aux;
 }
 
-
-sClases* LeerArchivoClasesaLista(ifstream* archivo,sClases *&lista,int &n)
+void LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n)
 {
     if(!archivo->is_open() || lista==nullptr)
-        return nullptr;
+        return;
 
     sClases* nuevalista= new sClases[n];
     char coma=',';
     int i=0;
-
-    while(*archivo>>nuevalista[i].IDclase>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].horario){
+//no crar nueva lista, llenar esa que pasaron y que se edite dentro de la funcion, funcion void.
+    while(archivo>>nuevalista[i].IDclase>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].horario){
 
         resize_clase(lista,n);
 
@@ -91,8 +89,8 @@ sClases* LeerArchivoClasesaLista(ifstream* archivo,sClases *&lista,int &n)
         (lista+i)->horario=nuevalista->horario;
         i++;
     }
-    delete[]lista;
-    return nuevalista;
+    delete[]nuevalista;
+
 }
 
 bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N)
@@ -136,9 +134,9 @@ bool LeerAsistencia(ifstream* archiasist,sAsistencia* cupo){
 
 }
 
-sAsistencia* binariolista(ifstream*archi) {
+void binariolista(ifstream*archi) {
     if (!archi->is_open())
-        return nullptr;
+        return;
 
     int cantLineas = 0;
     string linea;
@@ -155,7 +153,6 @@ sAsistencia* binariolista(ifstream*archi) {
 
     }
 
-    return lineasArray;
 }//el delete se hace en el main despues de dejar de usar la variable;
 
 

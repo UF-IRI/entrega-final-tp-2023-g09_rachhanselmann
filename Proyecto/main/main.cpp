@@ -14,8 +14,8 @@ int main() {
     ifstream archiClase;
     archiClase.open("iriClasesGYM.csv");
     int ncla=-1;
-    sClases*listacla1=new sClases[ncla];
-    sClases* resul1=LeerArchivoClasesaLista(*archiClase, listacla1, ncla);
+    sClases* listacla1=new sClases[ncla];
+    LeerArchivoClasesaLista(*archiClase, listacla1, ncla);
     archiClase.close();
     delete[] listacla1;
 
@@ -23,7 +23,7 @@ int main() {
     archiCli.open("iriClientesGYM.csv");
     int ncli=-1;
     sClientes* listacli1=new sClientes[ncli];
-    sClientes* resul2=ClienteLista(*archiCli, listacli1, ncli);
+    ClienteLista(*archiCli, listacli1, ncli);
     archiCli.close();
     delete[] listacli1;
 
@@ -32,15 +32,15 @@ int main() {
     int nasi=-1;
     sAsistencia* listaasis1=new sAsistencia[nasi];
     //falta resize
-    sAsistencia* resul3=binariolista(*archiAsis);
+    binariolista(*archiAsis);
     archiAsis.close();
     delete[] listaasis1;    
 
     ofstream Asistencia;
-    bool salida3=binariolista(*Asistencia);
-    cout<<salida3;
+    binariolista(*Asistencia);
+    //cout<<salida3;
     Asistencia.close();
-    delete[] resul3;
+    delete[] listaasis1;
 
 
 
@@ -50,8 +50,8 @@ int main() {
     sAsistencia* listanuevaasis= new sAsistencia[n]; //N WHAT??
     sCupos* cuponuevo=new sCupos[n];// N WHAT?
 
-    sInscripcion inscrip{12, {23, 4, 322, 23}};
-    sAsistencia asist{7, 11, {inscrip}};
+    sInscripcion*inscrip=new sInscripcion{12, {23, 4, 322, 23}};
+    sAsistencia*asist=new sAsistencia{7, 11, {inscrip}};
 
     //sInscripcion* insc=new sInscripcion{11, {23, 4, 323, 20}};
     //sAsistencia* nuevocli= new sAsistencia{6, 10, {insc}};
@@ -68,7 +68,7 @@ int main() {
         case (1):
         {
             system("cls");
-            string IDpersona= InscripcionMusculito(resul2, ncli);
+            string IDpersona= InscripcionMusculito(listacli1, ncli);
             cout<<"Se ha registrado con exito. Su ID generado es:"<<IDpersona<<endl;
             break;
         }
@@ -101,16 +101,16 @@ int main() {
 
     ofstream Clase;
     Clase.open("iriClasesGYM.csv");
-    bool salida1=EscribirArchivoClases(&Clase, resul1, ncla);
+    bool salida1=EscribirArchivoClases(&Clase, listacla1, ncla);
     cout<<salida1;
     Clase.close();
-    delete[] resul1;
+    delete[] listacla1;
 
     ofstream Clientes;
-    bool salida2=EscribirArchivoClientes(&Clientes, resul2, ncli);
+    bool salida2=EscribirArchivoClientes(&Clientes, listacli1, ncli);
     cout<<salida2;
     Clientes.close();
-    delete[] resul2;
+    delete[] listacli1;
 
 
 
