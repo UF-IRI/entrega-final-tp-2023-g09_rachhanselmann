@@ -80,7 +80,7 @@ void LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n)
     char coma=',';
     int i=0;
 //no crar nueva lista, llenar esa que pasaron y que se edite dentro de la funcion, funcion void.
-    while(archivo>>nuevalista[i].IDclase>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].horario){
+    while(*archivo>>nuevalista[i].IDclase>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].horario){
 
         resize_clase(lista,n);
 
@@ -142,14 +142,18 @@ void binariolista(ifstream*archi) {
     string linea;
     int i=0;
     while (getline(*archi, linea)) {
-        cantLineas=linea[i];
+        //cantLineas=linea[i];
+        //i++;
+        cantLineas++;
         i++;
     }
 
     sAsistencia* lineasArray = new sAsistencia[cantLineas];
 
     for (int i = 0; i < cantLineas; ++i) {
-        getline(*archi, lineasArray[i]);
+
+        getline(&archi, lineasArray[i]);
+
 
     }
 

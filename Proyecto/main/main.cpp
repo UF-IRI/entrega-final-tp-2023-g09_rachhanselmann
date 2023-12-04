@@ -15,7 +15,7 @@ int main() {
     archiClase.open("iriClasesGYM.csv");
     int ncla=-1;
     sClases* listacla1=new sClases[ncla];
-    LeerArchivoClasesaLista(*archiClase, listacla1, ncla);
+    LeerArchivoClasesaLista(&archiClase, listacla1, ncla);
     archiClase.close();
     delete[] listacla1;
 
@@ -23,7 +23,7 @@ int main() {
     archiCli.open("iriClientesGYM.csv");
     int ncli=-1;
     sClientes* listacli1=new sClientes[ncli];
-    ClienteLista(*archiCli, listacli1, ncli);
+    ClienteLista(&archiCli, listacli1, ncli);
     archiCli.close();
     delete[] listacli1;
 
@@ -32,13 +32,16 @@ int main() {
     int nasi=-1;
     sAsistencia* listaasis1=new sAsistencia[nasi];
     //falta resize
-    binariolista(*archiAsis);
+    binariolista(&archiAsis);
     archiAsis.close();
-    delete[] listaasis1;    
+    delete[] listaasis1;
+
+    int n=-1;
+    sCupos* cuponuevo=new sCupos[n];// N WHAT?
 
     ofstream Asistencia;
-    binariolista(*Asistencia);
-    //cout<<salida3;
+    bool resul=EscribirAsistencia(&Asistencia,cuponuevo);
+    cout<<resul;
     Asistencia.close();
     delete[] listaasis1;
 
@@ -46,9 +49,9 @@ int main() {
 
     int opcion=0;
 
-    int n=-1;
+
     sAsistencia* listanuevaasis= new sAsistencia[n]; //N WHAT??
-    sCupos* cuponuevo=new sCupos[n];// N WHAT?
+
 
     sInscripcion*inscrip=new sInscripcion{12, {23, 4, 322, 23}};
     sAsistencia*asist=new sAsistencia{7, 11, {inscrip}};
@@ -77,7 +80,7 @@ int main() {
         {
             system("cls");
 
-            bool res=reserva(asist, listanuevaasis, n, listacla1, cuponuevo);
+            bool res=reserva(*asist, listanuevaasis, n, listacla1, cuponuevo);
             if(res==true)
             {
                 cout<<"La reserva se ha realizado con exito."<<endl;
@@ -95,7 +98,7 @@ int main() {
     listanuevaasis=eliminarrepetidos(listanuevaasis, n);
 
     ofstream archivoes("archivo_nuevo.dat", ios::binary);
-    bool ult=EscribirAsismañana(*archivoes, listanuevaasis);
+    bool ult=EscribirAsismañana(&archivoes, listanuevaasis);
     cout<<ult;
     delete[]listanuevaasis;
 
