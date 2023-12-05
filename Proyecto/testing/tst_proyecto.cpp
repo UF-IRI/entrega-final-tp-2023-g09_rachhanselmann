@@ -111,30 +111,24 @@ REQUIRE(result==true);
 //}
 
 
-//TEST_CASE("Eliminar repetidos de la lista de asistencia") {
+TEST_CASE("Eliminar repetidos de la lista de asistencia") {
 
-//    sInscripcion curso1 = {1, {23, 5, 323, 20}};
-//    sInscripcion curso2 = {2, {21, 9, 321, 40}};
-//    sInscripcion curso3 = {3, {4, 1, 320, 37}};
+    sInscripcion* curso0 =new sInscripcion {1, {23, 5, 323, 20}};
+    sInscripcion* curso1 =new sInscripcion {2, {21, 9, 321, 40}};
+    sInscripcion* curso2 =new sInscripcion {3, {4, 1, 320, 37}};
 
-//    sAsistencia listaAsistencia[0] = {123 1, &curso1};
-//    sAsistencia listaAsistencia[1]= {456, 2, &curso2};
-//    sAsistencia listaAsistencia[2]= {789, 3, &curso3};
-//    sAsistencia listaAsistencia[3]= {123, 1, &curso1};  // Repetido
+    sAsistencia*listaAsistencia=new sAsistencia[4];
+    listaAsistencia[0]={123,1, {curso0}};
+    listaAsistencia[1]= {456, 2, {curso1}};
+    listaAsistencia[2]= {789, 3, {curso2}};
+    listaAsistencia[3]={123, 1, {curso0}};  // Repetido
 
-//    int n = 4;
+    int n = 4;
 
-//    sAsistencia* listaSinRepetidos = eliminarrepetidos(listaAsistencia, n);
+    sAsistencia* listaSinRepetidos = eliminarrepetidos(listaAsistencia, n);
 
-//    SECTION("Verifica que los repetidos fueron eliminados") {
+    SECTION("Verifica que los repetidos fueron eliminados") {
 
-//    REQUIRE(n == 3);
+    REQUIRE(n == 3);
+    }};
 
-
-//    for (int i = 0; i < n; i++) {
-//        for (int j = i + 1; j < n; j++) {
-//            REQUIRE((listaSinRepetidos[i].iDCliente != listaSinRepetidos[j].iDCliente) || (listaSinRepetidos[i].CursosInscriptos->iDCurso != listaSinRepetidos[j].CursosInscriptos->iDCurso));
-//        }
-//    }
-//    }
-//}

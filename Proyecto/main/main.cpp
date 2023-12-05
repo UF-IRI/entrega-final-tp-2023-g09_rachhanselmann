@@ -23,7 +23,7 @@ int main() {
     archiCli.open("iriClientesGYM.csv");
     int ncli=-1;
     sClientes* listacli1=new sClientes[ncli];
-    ClienteLista(&archiCli, listacli1, ncli);
+    ClienteLista(archiCli, listacli1, ncli);
     archiCli.close();
     delete[] listacli1;
 

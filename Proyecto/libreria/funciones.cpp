@@ -12,13 +12,13 @@ void resize_cli(sClientes*& lista, int &n){
 }
 
 
-void ClienteLista(ifstream *&archicli,sClientes*lista,int &n ){
+void ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
 
     if(!archicli->is_open() || lista==nullptr)
         return;
 
     sClientes* nuevalista= new sClientes[n];
-    char coma=',';
+    string coma=",";
     int i=0;
 
     while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].fecha_nac.dia>>nuevalista[i].fecha_nac.mes>>nuevalista[i].fecha_nac.anio>>coma>>nuevalista[i].estado){
@@ -262,8 +262,14 @@ string InscripcionMusculito(sClientes*lista, int&n)
     string PosCli=to_string(posCliente);
     nuevoCliente.iD=PosCli;
     resize_cli(lista, n);//agrandamos la lista para que entre el nuevo cliente
-    lista[n]=nuevoCliente;
-
+    lista[n].iD=nuevoCliente.iD;
+    lista[n].nombre=nuevoCliente.nombre;
+    lista[n].apellido=nuevoCliente.apellido;
+    lista[n].mail=nuevoCliente.mail;
+    lista[n].numero_telefono=nuevoCliente.numero_telefono;
+    lista[n].fecha_nac.anio=nuevoCliente.fecha_nac.anio;
+    lista[n].fecha_nac.mes=nuevoCliente.fecha_nac.mes;
+    lista[n].fecha_nac.dia=nuevoCliente.fecha_nac.dia;
     return PosCli;
 
 }
