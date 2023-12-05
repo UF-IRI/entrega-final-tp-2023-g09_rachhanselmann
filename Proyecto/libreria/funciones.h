@@ -26,11 +26,12 @@ bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N);
 
 
 //Gimnasio
-bool LeerAsistencia(ifstream* archiasist,sAsistencia* cupo);//binario
+void LeerAsistencia(ifstream* archiasist,sAsistencia* cupo);//binario
 void binariolista(ifstream* archi);
 //bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
 bool EscribirAsistencia(ofstream* Asistencia,sCupos* cuponuevo);
 bool EscribirAsismañana(ofstream* archi, sAsistencia* asis);
+void resize_asis(sAsistencia*& lista, int &n);
 
 //Funciones extra
 time_t fechaInscripcion();

@@ -3,31 +3,85 @@
 #include "gimnasio.h"
 #include "clientes.h"
 
-//TEST_CASE("Resize de lista de clientes") {
-//    int n = 5;
-//    sClientes* lista = new sClientes[n];
 
-//    SECTION("Verificar tamaño después del resize") {
-//    resize_cli(lista, n);
+TEST_CASE("Resize de lista de clientes") {
+    int n = 5;
+    sClientes* lista = new sClientes[n];
 
-//    REQUIRE(n == 6);
-//    }
-//}//deberia hacerse lo mismo con todos los resize
+    SECTION("Verificar tamaño después del resize") {
+    resize_cli(lista, n);
+
+    // Verificar que el tamaño de la lista ha aumentado a 6
+    REQUIRE(n == 6);
+
+}
+}
+
+TEST_CASE("Resize de lista de clases") {
+int n = 6;
+sClases* lista = new sClases[n];
+
+SECTION("Verificar tamaño después del resize") {
+resize_clase(lista, n);
+
+// Verificar que el tamaño de la lista ha aumentado a 6
+REQUIRE(n == 7);
+}
+}
+
+TEST_CASE("Resize de lista de asistencias") {
+int n = 5;
+sAsistencia* lista = new sAsistencia[n];
+
+SECTION("Verificar tamaño después del resize") {
+resize_asis(lista, n);
+
+// Verificar que el tamaño de la lista ha aumentado a 6
+REQUIRE(n == 6);
+    }
+}
+
+TEST_CASE("Verificar cupos de asistencia") {
+    // Crear datos de prueba
+    sCupos *cupotot = new sCupos{45};  // Ajusta el número de cupos según tus necesidades
+    sClases *clases = new sClases{1,"Zumba","12"};   // Ajusta el ID de clase según tus necesidades
+    sInscripcion*insc=new sInscripcion{1,{12,3,2008,10}};
+    sAsistencia* list = new sAsistencia{1,8,{insc}};  // Ajusta el tamaño del array según tus necesidades
+
+    SECTION("Verificar cupos") {
+bool result = verificar_cupos(list, clases, *cupotot);
+REQUIRE(clases->IDclase==list->CursosInscriptos->iDCurso);
+// Verificar que el resultado es verdadero ya que hay espacio disponible
+REQUIRE(result==true);
+    }
+    delete cupotot;
+    delete clases;
+    delete insc;
+    delete list;
+}
 
 
 
 
-////TEST_CASE("Abrir archivo en modo lectura"){
 
-////    sClases*lista=new sClases[1];
-////    lista[0]={"6","spinning","8"};
 
-////    ifstream inputFile("iriClasesGYM.csv");
-////    int n=1;
-////    sClases*cla=LeerArchivoClasesaLista(*inputFile, lista, n);
 
-////    REQUIRE(LeerArchivoClasesaLista(cla[0], lista[0], n)=={"6","spinning","8"});
-////}
+
+
+
+
+
+//TEST_CASE("Abrir archivo en modo lectura"){
+
+//    sClases*lista=new sClases[1];
+//    lista[0]={"6","spinning","8"};
+
+//    ifstream inputFile("iriClasesGYM.csv");
+//    int n=1;
+//    sClases*cla=LeerArchivoClasesaLista(*inputFile, lista, n);
+
+//    REQUIRE(LeerArchivoClasesaLista(cla[0], lista[0], n)=={"6","spinning","8"});
+//}
 
 
 

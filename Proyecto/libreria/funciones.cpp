@@ -71,6 +71,7 @@ void resize_clase(sClases*& lista, int &n){
     lista=aux;
 }
 
+
 void LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n)
 {
     if(!archivo->is_open() || lista==nullptr)
@@ -123,41 +124,46 @@ void resize_asis(sAsistencia*& lista, int &n){
     lista=aux;
 }
 
-bool LeerAsistencia(ifstream* archiasist,sAsistencia* cupo){
+void LeerAsistencia(ifstream* archiasist,sAsistencia* lista,int &n){
     if(!archiasist->is_open())
-        return false;
+        return ;
+    resize_asis(lista, n);
 
+    for (int i=0;i<n;i++){
 
-    archiasist->read((char*)cupo, sizeof(sAsistencia));
+    archiasist->read((char*)&lista[i], sizeof(sAsistencia));
 
-    return true;
+    }
+    return;
 
 }
 
-void binariolista(ifstream*archi) {
-    if (!archi->is_open())
-        return;
+//void binariolista(ifstream*archi,sAsistencia*lista) {
+//    if (!archi->is_open())
+//        return;
 
-    int cantLineas = 0;
-    string linea;
-    int i=0;
-    while (getline(*archi, linea)) {
-        //cantLineas=linea[i];
-        //i++;
-        cantLineas++;
-        i++;
-    }
+//    int cantLineas = 0;
+//    string linea;
+//    int i=0;
+//    while (getline(*archi, linea)) {
+//        //cantLineas=linea[i];
 
-    sAsistencia* lineasArray = new sAsistencia[cantLineas];
+//        cantLineas++;
+//        i++;
+//    }
 
-    for (int i = 0; i < cantLineas; ++i) {
+//    sAsistencia* lineasArray = new sAsistencia[cantLineas];
+//    string coma=",";
+//    for (int i = 0; i < cantLineas; ++i) {
 
-        getline(&archi, lineasArray[i]);
+//        getline(*archi, &lineasArray[i]);
+//        lista[i]=lineasArray[i];
 
 
-    }
 
-}//el delete se hace en el main despues de dejar de usar la variable;
+//    }
+
+//}//el delete se hace en el main despues de dejar de usar la variable;
 
 
 bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo){
@@ -244,22 +250,21 @@ string InscripcionMusculito(sClientes*lista, int&n)
     cout<<"Ingrese su dia de nacimiento:"<<endl;
     cin>>nuevoCliente.fecha_nac.dia;
 
-    sClientes lineaActual;
-    sClientes ultimaLinea;
 
-    while (getline(lista, lineaActual)) {
-        ultimaLinea = lineaActual;
-    }
 
-    string posCliente=ultimaLinea.iD;
-    posCliente+=1;
-    nuevoCliente.iD=posCliente;
-    nuevoCliente.estado=0; //lo igualamos a cero porque en cuanto te inscribis pagas tu primer mes
 
-    resize_cli(lista, n);//agrandamos el array para incluir al nuevo cliente
+
+    sClientes ultimaLinea=lista[n];
+    int ultlin=stoi(ultimaLinea.iD);
+    ultlin+=1;
+    int posCliente=ultlin;
+
+    string PosCli=to_string(posCliente);
+    nuevoCliente.iD=PosCli;
+    resize_cli(lista, n);//agrandamos la lista para que entre el nuevo cliente
     lista[n]=nuevoCliente;
 
-    return posCliente;
+    return PosCli;
 
 }
 bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos*cupotot){//, sAsistencia asis
