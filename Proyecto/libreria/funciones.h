@@ -1,9 +1,9 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
-#include "clientes.h"
-#include "gimnasio.h"
 
+#include "gimnasio.h"
+#include "clientes.h"
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -16,7 +16,7 @@ using namespace std;
 
 //clientes
 void resize_cli(sClientes*& lista, int &n);
-void ClienteLista(ifstream *archicli,sClientes*lista,int &n );
+void ClienteLista(ifstream *archicli,sClientes*lista,int &n);
 bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N);
 
 //clases

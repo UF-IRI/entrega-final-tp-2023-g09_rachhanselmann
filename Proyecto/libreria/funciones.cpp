@@ -12,7 +12,7 @@ void resize_cli(sClientes*& lista, int &n){
 }
 
 
-void ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
+void ClienteLista(ifstream *archicli,sClientes*lista,int &n){
 
     if(!archicli->is_open() || lista==nullptr)
         return;
@@ -21,7 +21,7 @@ void ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
     string coma=",";
     int i=0;
 
-    while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].fecha_nac.dia>>nuevalista[i].fecha_nac.mes>>nuevalista[i].fecha_nac.anio>>coma>>nuevalista[i].estado){
+    while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].fecha_nac->dia>>nuevalista[i].fecha_nac->mes>>nuevalista[i].fecha_nac->anio>>coma>>nuevalista[i].estado){
 
         resize_cli(lista,n);
         (lista+i)->iD=nuevalista->iD;
@@ -53,7 +53,7 @@ bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N){
 
 
     for(int i=0;i<N;i++){
-        *archicli<<listacli[i].iD<<coma<<listacli[i].nombre<<coma<<listacli[i].apellido<<coma<<listacli[i].mail<<coma<<listacli[i].numero_telefono<<coma<<listacli[i].fecha_nac.dia<<listacli[i].fecha_nac.mes<<listacli[i].fecha_nac.anio<<coma<<listacli[i].estado<<endl;
+        *archicli<<listacli[i].iD<<coma<<listacli[i].nombre<<coma<<listacli[i].apellido<<coma<<listacli[i].mail<<coma<<listacli[i].numero_telefono<<coma<<listacli[i].fecha_nac->dia<<listacli[i].fecha_nac->mes<<listacli[i].fecha_nac->anio<<coma<<listacli[i].estado<<endl;
 
     }
     return true;
@@ -244,11 +244,11 @@ string InscripcionMusculito(sClientes*lista, int&n)
     cout<<"Ingrese su telefono:"<<endl;
     cin>>nuevoCliente.numero_telefono;
     cout<<"Ingrese su año de nacimiento:"<<endl;
-    cin>>nuevoCliente.fecha_nac.anio;
+    cin>>nuevoCliente.fecha_nac->anio;
     cout<<"Ingrese su mes de nacimiento:"<<endl;
-    cin>>nuevoCliente.fecha_nac.mes;
+    cin>>nuevoCliente.fecha_nac->mes;
     cout<<"Ingrese su dia de nacimiento:"<<endl;
-    cin>>nuevoCliente.fecha_nac.dia;
+    cin>>nuevoCliente.fecha_nac->dia;
 
 
 
@@ -267,9 +267,9 @@ string InscripcionMusculito(sClientes*lista, int&n)
     lista[n].apellido=nuevoCliente.apellido;
     lista[n].mail=nuevoCliente.mail;
     lista[n].numero_telefono=nuevoCliente.numero_telefono;
-    lista[n].fecha_nac.anio=nuevoCliente.fecha_nac.anio;
-    lista[n].fecha_nac.mes=nuevoCliente.fecha_nac.mes;
-    lista[n].fecha_nac.dia=nuevoCliente.fecha_nac.dia;
+    lista[n].fecha_nac->anio=nuevoCliente.fecha_nac->anio;
+    lista[n].fecha_nac->mes=nuevoCliente.fecha_nac->mes;
+    lista[n].fecha_nac->dia=nuevoCliente.fecha_nac->dia;
     return PosCli;
 
 }

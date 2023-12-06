@@ -1,8 +1,7 @@
 #include <catch2/catch.hpp>
 #include "funciones.h"
-#include "gimnasio.h"
-#include "clientes.h"
 
+#include <sstream>
 
 TEST_CASE("Resize de lista de clientes") {
     int n = 5;
@@ -13,7 +12,7 @@ TEST_CASE("Resize de lista de clientes") {
 
     // Verificar que el tamaño de la lista ha aumentado a 6
     REQUIRE(n == 6);
-
+    delete[] lista;
 }
 }
 
@@ -90,6 +89,116 @@ TEST_CASE("Reservar cupos") {
     delete cups;
 
 }
+
+TEST_CASE("Escribir archivo de clientes") {
+    // Crear datos de prueba
+
+    sClientes*listaClientes = new sClientes[3];
+    FechaNac*fechita=new FechaNac[3];
+    fechita[0]={1,2,1990};
+    fechita[1]={15,8,1985};
+    fechita[3]={10,12,2003};
+
+    listaClientes[0]= {93, "Juan", "Perez", "juan@gmail.com", "123456789", fechita[0].dia,fechita[0].mes,fechita[2].anio, 1};
+    listaClientes[1]= {25, "Maria", "Lopez", "maria@gmail.com", "987654321", {15, 8, 1985}, 0};
+    listaClientes[2]= {36, "Carlos", "Gonzalez", "carlos@gmail.com", "555555555", {10, 12, 2000}, 1};
+
+    int N = 3;
+
+    ofstream archi;
+    archi.open("");
+    stringstream ss;
+
+    // Llamar a la función EscribirArchivoClientes
+    bool resultado = EscribirArchivoClientes(&archi, listaClientes, N);
+
+    SECTION("Verificar que la escritura fue exitosa") {
+REQUIRE(resultado == true);
+    }
+//    SECTION("Verificar que la primer linea es el encabezado"){
+//        REQUIRE();
+
+//    }
+//    SECTION("Verificar datos ingresados correctos"){
+//        REQUIRE();
+
+//    }
+}
+
+TEST_CASE("Pasar de cliente a lista") {
+
+
+    stringstream ss;
+
+    ss <<"44123456,Martina,Gomez,martugomez1@gmail.com, 1143456776, 11,5,2003,-2000"<<endl;
+    ss << "45678901,Bautista,Gonzalez,bauti123@hotmail.com, 1156745678, 22,8,2004,0"<<endl;
+    ss << "45876543,Delfina,Sanchez,delfi_sanchez@gmail.com,1123344556, 5,10,2004,3500"<<endl;
+
+    ifstream archicli_stream(ss.str());
+    // Creamos una lista vacía de clientes
+    sClientes* lista = nullptr;
+    int n = 0;
+
+    ClienteLista(&archicli_stream, lista, n);
+
+    // Verificamos el tamaño de la lista
+    REQUIRE(n == 3);
+
+    // Verificamos elementos de la lista
+    SECTION("Elemento 1:"){
+
+REQUIRE(lista[0].iD == "44123456");
+REQUIRE(lista[0].nombre == "Martina");
+REQUIRE(lista[0].apellido == "Gomez");
+REQUIRE(lista[0].mail == "martugomez1@gmail.com");
+REQUIRE(lista[0].numero_telefono==1143456776);
+REQUIRE(lista[0].fecha_nac->dia == 11);
+REQUIRE(lista[0].fecha_nac->mes==5);
+REQUIRE(lista[0].fecha_nac->anio==2003);
+REQUIRE(lista[0].estado == -2000);
+
+    }
+
+    SECTION("Elemento 2:"){
+
+REQUIRE(lista[1].iD == "45678901");
+REQUIRE(lista[1].nombre == "Bautista");
+REQUIRE(lista[1].apellido == "Gonzalez");
+REQUIRE(lista[1].mail == "bauti123@hotmail.com");
+REQUIRE(lista[1].numero_telefono==1156745678);
+REQUIRE(lista[1].fecha_nac->dia == 22);
+REQUIRE(lista[1].fecha_nac->mes==8);
+REQUIRE(lista[1].fecha_nac->anio==2004);
+REQUIRE(lista[1].estado == 0);
+    }
+
+    SECTION("Elemento 3:"){
+
+REQUIRE(lista[2].iD == "45876543");
+REQUIRE(lista[2].nombre == "Delfina");
+REQUIRE(lista[2].apellido == "Sanchez");
+REQUIRE(lista[2].mail == "delfi_sanchez@gmail.com");
+REQUIRE(lista[2].numero_telefono==1123344556);
+REQUIRE(lista[2].fecha_nac->dia == 5);
+REQUIRE(lista[2].fecha_nac->mes==10);
+REQUIRE(lista[2].fecha_nac->anio==2004);
+REQUIRE(lista[2].estado == 3500);
+
+
+    }
+
+
+    delete[] lista;
+}
+
+
+
+
+
+
+
+
+
 
 
 
