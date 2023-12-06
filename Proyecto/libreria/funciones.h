@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <sstream>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ void resize_asis(sAsistencia*& lista, int &n);
 time_t fechaInscripcion();
 string InscripcionMusculito(sClientes*lista, int&n);
 bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos cupotot);
-bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases,sCupos* cups);
+bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n, sClases*clases, sCupos* cups);
 void MenuPrincipal();
 sAsistencia* eliminarrepetidos(sAsistencia* lista, int& n);
 

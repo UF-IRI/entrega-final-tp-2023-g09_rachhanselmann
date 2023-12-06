@@ -21,20 +21,24 @@ void ClienteLista(ifstream *archicli,sClientes*lista,int &n){
     string coma=",";
     int i=0;
 
-    while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].fecha_nac->dia>>nuevalista[i].fecha_nac->mes>>nuevalista[i].fecha_nac->anio>>coma>>nuevalista[i].estado){
+    while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].numero_telefono>>coma>>nuevalista[i].fecha_nac->dia>>nuevalista[i].fecha_nac->mes>>nuevalista[i].fecha_nac->anio>>coma>>nuevalista[i].estado){
 
         resize_cli(lista,n);
+
         (lista+i)->iD=nuevalista->iD;
         (lista+i)->nombre=nuevalista->nombre;
         (lista+i)->apellido=nuevalista->apellido;
         (lista+i)->mail=nuevalista->mail;
         (lista+i)->numero_telefono=nuevalista->numero_telefono;
-        (lista+i)->fecha_nac=nuevalista->fecha_nac;
+        (lista+i)->fecha_nac->dia=nuevalista->fecha_nac->dia;
+        (lista+i)->fecha_nac->mes=nuevalista->fecha_nac->mes;
+        (lista+i)->fecha_nac->anio=nuevalista->fecha_nac->anio;
         (lista+i)->estado=nuevalista->estado;
 
         i++;
     }
-    //delete[]lista va en el main
+
+    delete[] nuevalista;
 
 }
 
@@ -80,7 +84,7 @@ void LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n)
     sClases* nuevalista= new sClases[n];
     char coma=',';
     int i=0;
-//no crar nueva lista, llenar esa que pasaron y que se edite dentro de la funcion, funcion void.
+
     while(*archivo>>nuevalista[i].IDclase>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].horario){
 
         resize_clase(lista,n);
@@ -90,6 +94,7 @@ void LeerArchivoClasesaLista(ifstream* archivo,sClases *lista,int &n)
         (lista+i)->horario=nuevalista->horario;
         i++;
     }
+
     delete[]nuevalista;
 
 }
@@ -163,7 +168,7 @@ void LeerAsistencia(ifstream* archiasist,sAsistencia* lista,int &n){
 
 //    }
 
-//}//el delete se hace en el main despues de dejar de usar la variable;
+//}el delete se hace en el main despues de dejar de usar la variable;
 
 
 bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo){
@@ -251,9 +256,6 @@ string InscripcionMusculito(sClientes*lista, int&n)
     cin>>nuevoCliente.fecha_nac->dia;
 
 
-
-
-
     sClientes ultimaLinea=lista[n];
     int ultlin=stoi(ultimaLinea.iD);
     ultlin+=1;
@@ -273,6 +275,7 @@ string InscripcionMusculito(sClientes*lista, int&n)
     return PosCli;
 
 }
+
 bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos*cupotot){//, sAsistencia asis
 
     unsigned int j=0;
