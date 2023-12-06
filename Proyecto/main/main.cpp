@@ -23,7 +23,7 @@ int main() {
     archiCli.open("iriClientesGYM.csv");
     int ncli=-1;
     sClientes* listacli1=new sClientes[ncli];
-    ClienteLista(archiCli, listacli1, ncli);
+    ClienteLista(&archiCli, listacli1, ncli);
     archiCli.close();
     delete[] listacli1;
 
@@ -32,15 +32,12 @@ int main() {
     int nasi=-1;
     sAsistencia* listaasis1=new sAsistencia[nasi];
     //falta resize
-    binariolista(&archiAsis);
+    LeerAsistencia(&archiAsis, listaasis1);
     archiAsis.close();
-    delete[] listaasis1;
 
-    int n=-1;
-    sCupos* cuponuevo=new sCupos[n];// N WHAT?
 
     ofstream Asistencia;
-    bool resul=EscribirAsistencia(&Asistencia,cuponuevo);
+    bool resul=EscribirAsistencia(&Asistencia, listaasis1);
     cout<<resul;
     Asistencia.close();
     delete[] listaasis1;
@@ -48,6 +45,8 @@ int main() {
 
 
     int opcion=0;
+    int n=-1;
+    sCupos* cuponuevo=new sCupos[n];// N WHAT
 
 
     sAsistencia* listanuevaasis= new sAsistencia[n]; //N WHAT??

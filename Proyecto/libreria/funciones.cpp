@@ -34,7 +34,7 @@ void ClienteLista(ifstream *archicli,sClientes*lista,int &n ){
 
         i++;
     }
-    //delete[]lista ;
+    //delete[]lista va en el main
 
 }
 

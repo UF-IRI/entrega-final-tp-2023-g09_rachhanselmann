@@ -62,7 +62,34 @@ REQUIRE(result==true);
 
 
 
+TEST_CASE("Reservar cupos") {
 
+    sInscripcion*insc=new sInscripcion[2];
+    insc[0]={2, {23,4,2023,45}};
+    insc[1]={5, {18,11,2023,51}};
+    insc[2]={8, {3,9,2023,30}};
+
+    sAsistencia*asis=new sAsistencia[2];
+    asis[0]={1, 8, {insc}};  // Inicializa tu lista de asistencias
+    asis[1]={2, 4, {insc}};
+    asis[2]={3, 15, {insc}};
+
+    int n = 3;   // Inicializa la cantidad de elementos en la lista
+
+    sClases*clases=new sClases{2, "Spinning", "10:00"};  // Inicializa tus clases
+    sCupos*cups=new sCupos{45};  // Inicializa tus cupos
+
+    sInscripcion in={7, {26,5,2022,34}};
+    sAsistencia NuevoCli={4, 23, {in}};
+
+  REQUIRE(reserva(NuevoCli, asis, n, &clases, &cups)==true);
+
+    delete insc;
+    delete asis;
+    delete clases;
+    delete cups;
+
+}
 
 
 
@@ -129,6 +156,7 @@ TEST_CASE("Eliminar repetidos de la lista de asistencia") {
 
     SECTION("Verifica que los repetidos fueron eliminados") {
 
-    REQUIRE(n == 3);
-    }};
+    REQUIRE(n==3);
+    }
+}
 

@@ -16,7 +16,7 @@ using namespace std;
 
 //clientes
 void resize_cli(sClientes*& lista, int &n);
-void ClienteLista(ifstream *archicli,sClientes*&lista,int &n );
+void ClienteLista(ifstream *archicli,sClientes*lista,int &n );
 bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N);
 
 //clases
@@ -27,9 +27,7 @@ bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N);
 
 //Gimnasio
 void LeerAsistencia(ifstream* archiasist,sAsistencia* cupo);//binario
-void binariolista(ifstream* archi);
-//bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
-bool EscribirAsistencia(ofstream* Asistencia,sCupos* cuponuevo);
+bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
 bool EscribirAsismañana(ofstream* archi, sAsistencia* asis);
 void resize_asis(sAsistencia*& lista, int &n);
 
@@ -38,7 +36,6 @@ time_t fechaInscripcion();
 string InscripcionMusculito(sClientes*lista, int&n);
 bool verificar_cupos(sAsistencia* list,sClases* clases, sCupos cupotot);
 bool reserva(sAsistencia nuevocliente, sAsistencia*listaasis, int &n,sClases*clases,sCupos* cups);
-
 void MenuPrincipal();
 sAsistencia* eliminarrepetidos(sAsistencia* lista, int& n);
 
