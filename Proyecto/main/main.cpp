@@ -12,7 +12,7 @@ using namespace std;
 int main() {
 
     ifstream archiClase;
-    archiClase.open("iriClasesGYM.csv");
+    archiClase.open("iriClasesGYM.csv", ios::in);
     int ncla=-1;
     sClases* listacla1=new sClases[ncla];
     LeerArchivoClasesaLista(&archiClase, listacla1, ncla);
@@ -76,7 +76,7 @@ int main() {
     delete[] listacli1;
 
     ifstream archiAsis;
-    archiAsis.open("asistencias_1697673600000.dat");
+    archiAsis.open("asistencias_1697673600000.dat", ios::in);
     int nasi=5;
     sAsistencia* listaasis1=new sAsistencia[nasi];
     if(!archiAsis.is_open())
@@ -113,10 +113,7 @@ int main() {
     int opcion=0;
     int n=4;
     sCupos* cuponuevo=new sCupos[n];// N WHAT
-
-
     sAsistencia* listanuevaasis= new sAsistencia[n]; //N WHAT??
-
 
     sInscripcion*inscrip=new sInscripcion{12, {23, 4, 322, 23}};
     sAsistencia*asist=new sAsistencia{7, 11, {inscrip}};

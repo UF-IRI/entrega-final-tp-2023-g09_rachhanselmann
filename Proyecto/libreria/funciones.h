@@ -27,8 +27,8 @@ bool EscribirArchivoClases(ofstream* archivo,sClases* lista,int N);
 
 
 //Gimnasio
-void LeerAsistencia(ifstream* archiasist,sAsistencia* cupo);//binario
-bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
+//void LeerAsistencia(ifstream* archiasist,sAsistencia* cupo);//binario
+//bool EscribirAsistencia(ofstream* archiasist,sAsistencia* cupo);
 bool EscribirAsismañana(ofstream* archi, sAsistencia* asis);
 void resize_asis(sAsistencia*& lista, int &n);
 
