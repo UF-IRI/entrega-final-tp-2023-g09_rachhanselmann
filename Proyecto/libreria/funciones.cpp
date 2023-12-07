@@ -12,35 +12,35 @@ void resize_cli(sClientes*& lista, int &n){
 }
 
 
-void ClienteLista(ifstream *archicli,sClientes*lista,int &n){
+//void ClienteLista(ifstream *archicli,sClientes*lista,int &n){
 
-    if(!archicli->is_open() || lista==nullptr)
-        return;
+//    if(!archicli->is_open() || lista==nullptr)
+//        return;
 
-    sClientes* nuevalista= new sClientes[n];
-    string coma=",";
-    int i=0;
+//    sClientes* nuevalista= new sClientes[n];
+//    string coma=",";
+//    int i=0;
 
-    while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].numero_telefono>>coma>>nuevalista[i].fecha_nac->dia>>nuevalista[i].fecha_nac->mes>>nuevalista[i].fecha_nac->anio>>coma>>nuevalista[i].estado){
+//    while(*archicli>>nuevalista[i].iD>>coma>>nuevalista[i].nombre>>coma>>nuevalista[i].apellido>>coma>>nuevalista[i].mail>>coma>>nuevalista[i].numero_telefono>>coma>>nuevalista[i].fecha_nac->dia>>nuevalista[i].fecha_nac->mes>>nuevalista[i].fecha_nac->anio>>coma>>nuevalista[i].estado){
 
-        resize_cli(lista,n);
+//        resize_cli(lista,n);
 
-        (lista+i)->iD=nuevalista->iD;
-        (lista+i)->nombre=nuevalista->nombre;
-        (lista+i)->apellido=nuevalista->apellido;
-        (lista+i)->mail=nuevalista->mail;
-        (lista+i)->numero_telefono=nuevalista->numero_telefono;
-        (lista+i)->fecha_nac->dia=nuevalista->fecha_nac->dia;
-        (lista+i)->fecha_nac->mes=nuevalista->fecha_nac->mes;
-        (lista+i)->fecha_nac->anio=nuevalista->fecha_nac->anio;
-        (lista+i)->estado=nuevalista->estado;
+//        (lista+i)->iD=nuevalista->iD;
+//        (lista+i)->nombre=nuevalista->nombre;
+//        (lista+i)->apellido=nuevalista->apellido;
+//        (lista+i)->mail=nuevalista->mail;
+//        (lista+i)->numero_telefono=nuevalista->numero_telefono;
+//        (lista+i)->fecha_nac->dia=nuevalista->fecha_nac->dia;
+//        (lista+i)->fecha_nac->mes=nuevalista->fecha_nac->mes;
+//        (lista+i)->fecha_nac->anio=nuevalista->fecha_nac->anio;
+//        (lista+i)->estado=nuevalista->estado;
 
-        i++;
-    }
+//        i++;
+//    }
 
-    delete[] nuevalista;
+//    delete[] nuevalista;
 
-}
+//}
 
 
 bool EscribirArchivoClientes(ofstream* archicli,sClientes* listacli,int N){

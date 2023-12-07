@@ -95,10 +95,10 @@ TEST_CASE("Reservar cupos") {
 
   REQUIRE(reserva(NuevoCli, asis, n, listclases, cups)==true);
 
-    delete insc;
-    delete asis;
+    delete[] insc;
+    delete[] asis;
     delete[] listclases;
-    delete cups;
+    delete[] cups;
 
 }
 
@@ -111,9 +111,9 @@ TEST_CASE("Escribir archivo de clientes") {
     fechita[1]={15,8,1985};
     fechita[2]={10,12,2003};
 
-    listaClientes[0]= {"44756678", "Juan", "Perez", "juan@gmail.com", 123456789, fechita, 1};
-    listaClientes[1]= {"34", "Maria", "Lopez", "maria@gmail.com", 987654321, fechita, 0};
-    listaClientes[2]= {"35", "Carlos", "Gonzalez", "carlos@gmail.com", 555555555, fechita, 1};
+    listaClientes[0]= {"44756678", "Juan", "Perez", "juan@gmail.com", 123456789, fechita, 8500};
+    listaClientes[1]= {"34896434", "Maria", "Lopez", "maria@gmail.com", 987654321, fechita, -3000};
+    listaClientes[2]= {"43987654", "Carlos", "Gonzalez", "carlos@gmail.com", 555555555, fechita, 0};
 
     int N = 3;
 
@@ -137,71 +137,71 @@ TEST_CASE("Escribir archivo de clientes") {
 //    }
 }
 
-TEST_CASE("Pasar de cliente a lista") {
+//TEST_CASE("Pasar de cliente a lista") {
 
 
-    stringstream ss;
+//    stringstream ss;
 
-    ss <<"44123456,Martina,Gomez,martugomez1@gmail.com, 1143456776, 11,5,2003,-2000"<<endl;
-    ss << "45678901,Bautista,Gonzalez,bauti123@hotmail.com, 1156745678, 22,8,2004,0"<<endl;
-    ss << "45876543,Delfina,Sanchez,delfi_sanchez@gmail.com,1123344556, 5,10,2004,3500"<<endl;
+//    ss <<"44123456,Martina,Gomez,martugomez1@gmail.com, 1143456776, 11,5,2003,-2000"<<endl;
+//    ss << "45678901,Bautista,Gonzalez,bauti123@hotmail.com, 1156745678, 22,8,2004,0"<<endl;
+//    ss << "45876543,Delfina,Sanchez,delfi_sanchez@gmail.com,1123344556, 5,10,2004,3500"<<endl;
 
-    ifstream archicli_stream(ss.str());
+//    ifstream archicli_stream(ss.str());
 
-    sClientes* lista = nullptr;
-    int n = 0;
+//    sClientes* lista = nullptr;
+//    int n = 0;
 
-    ClienteLista(&archicli_stream, lista, n);
+//    ClienteLista(&archicli_stream, lista, n);
 
-    // Verificamos el tamaño de la lista
-    REQUIRE(n == 3);
+//    // Verificamos el tamaño de la lista
+//    REQUIRE(n == 3);
 
-    // Verificamos elementos de la lista
-    SECTION("Elemento 1:"){
+//    // Verificamos elementos de la lista
+//    SECTION("Elemento 1:"){
 
-REQUIRE(lista[0].iD == "44123456");
-REQUIRE(lista[0].nombre == "Martina");
-REQUIRE(lista[0].apellido == "Gomez");
-REQUIRE(lista[0].mail == "martugomez1@gmail.com");
-REQUIRE(lista[0].numero_telefono==1143456776);
-REQUIRE(lista[0].fecha_nac->dia == 11);
-REQUIRE(lista[0].fecha_nac->mes==5);
-REQUIRE(lista[0].fecha_nac->anio==2003);
-REQUIRE(lista[0].estado == -2000);
+//REQUIRE(lista[0].iD == "44123456");
+//REQUIRE(lista[0].nombre == "Martina");
+//REQUIRE(lista[0].apellido == "Gomez");
+//REQUIRE(lista[0].mail == "martugomez1@gmail.com");
+//REQUIRE(lista[0].numero_telefono==1143456776);
+//REQUIRE(lista[0].fecha_nac->dia == 11);
+//REQUIRE(lista[0].fecha_nac->mes==5);
+//REQUIRE(lista[0].fecha_nac->anio==2003);
+//REQUIRE(lista[0].estado == -2000);
 
-    }
+//    }
 
-    SECTION("Elemento 2:"){
+//    SECTION("Elemento 2:"){
 
-REQUIRE(lista[1].iD == "45678901");
-REQUIRE(lista[1].nombre == "Bautista");
-REQUIRE(lista[1].apellido == "Gonzalez");
-REQUIRE(lista[1].mail == "bauti123@hotmail.com");
-REQUIRE(lista[1].numero_telefono==1156745678);
-REQUIRE(lista[1].fecha_nac->dia == 22);
-REQUIRE(lista[1].fecha_nac->mes==8);
-REQUIRE(lista[1].fecha_nac->anio==2004);
-REQUIRE(lista[1].estado == 0);
-    }
+//REQUIRE(lista[1].iD == "45678901");
+//REQUIRE(lista[1].nombre == "Bautista");
+//REQUIRE(lista[1].apellido == "Gonzalez");
+//REQUIRE(lista[1].mail == "bauti123@hotmail.com");
+//REQUIRE(lista[1].numero_telefono==1156745678);
+//REQUIRE(lista[1].fecha_nac->dia == 22);
+//REQUIRE(lista[1].fecha_nac->mes==8);
+//REQUIRE(lista[1].fecha_nac->anio==2004);
+//REQUIRE(lista[1].estado == 0);
+//    }
 
-    SECTION("Elemento 3:"){
+//    SECTION("Elemento 3:"){
 
-REQUIRE(lista[2].iD == "45876543");
-REQUIRE(lista[2].nombre == "Delfina");
-REQUIRE(lista[2].apellido == "Sanchez");
-REQUIRE(lista[2].mail == "delfi_sanchez@gmail.com");
-REQUIRE(lista[2].numero_telefono==1123344556);
-REQUIRE(lista[2].fecha_nac->dia == 5);
-REQUIRE(lista[2].fecha_nac->mes==10);
-REQUIRE(lista[2].fecha_nac->anio==2004);
-REQUIRE(lista[2].estado == 3500);
-
-
-    }
+//REQUIRE(lista[2].iD == "45876543");
+//REQUIRE(lista[2].nombre == "Delfina");
+//REQUIRE(lista[2].apellido == "Sanchez");
+//REQUIRE(lista[2].mail == "delfi_sanchez@gmail.com");
+//REQUIRE(lista[2].numero_telefono==1123344556);
+//REQUIRE(lista[2].fecha_nac->dia == 5);
+//REQUIRE(lista[2].fecha_nac->mes==10);
+//REQUIRE(lista[2].fecha_nac->anio==2004);
+//REQUIRE(lista[2].estado == 3500);
 
 
-    delete[] lista;
-}
+//    }
+
+
+//    delete[] lista;
+//}
 
 
 

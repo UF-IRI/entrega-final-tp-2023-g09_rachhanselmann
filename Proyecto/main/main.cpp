@@ -21,31 +21,97 @@ int main() {
 
     ifstream archiCli;
     archiCli.open("iriClientesGYM.csv");
-    int ncli=-1;
+    int ncli=8;
     sClientes* listacli1=new sClientes[ncli];
-    ClienteLista(&archiCli, listacli1, ncli);
+
+    if(!archiCli.is_open())
+        return -1;
+    string encabezado;
+    getline(archiCli,encabezado);
+    char coma=',';
+    string linea;
+
+//    void resize_cli(sClientes*& lista, int &n){
+//        n=(n)+1;
+//        sClientes *aux=new sClientes[n];
+//        for(int i=0;i<n-1;i++){
+//            aux[i]=lista[i];}
+//        delete[] lista;
+//        lista=aux;
+//    }
+
+    while(getline(archiCli,linea)){
+        ncli=(ncli)+1;
+        sClientes*aux=new sClientes[ncli];
+        for (int i=0;i<ncli-1;i++){
+            aux[i]=listacli1[i];
+        }
+        delete[]listacli1;
+        listacli1=aux;
+
+        sClientes nuevoCliente;
+        stringstream ss(linea);
+        string auxnom, auxape, auxem, auxtel;
+        ss>>nuevoCliente.iD>>coma;
+        getline(ss,auxnom,coma);
+        getline(ss,auxape,coma);
+        getline(ss,auxem,coma);
+        getline(ss,auxtel,coma);
+        string fechnac;
+        getline(ss,fechnac,coma);
+//        unsigned int auxfech=stoul(fechnac);
+//        nuevoCliente.fecha_nac=auxfech;
+        ss>>nuevoCliente.estado>>coma;
+        nuevoCliente.nombre=auxnom;
+        nuevoCliente.apellido=auxape;
+        nuevoCliente.mail=auxem;
+        unsigned int tel= stoul(auxtel);
+        nuevoCliente.numero_telefono=tel;
+        listacli1[ncli-1]=nuevoCliente;
+
+    }
+
+//    ClienteLista(&archiCli, listacli1, ncli);
     archiCli.close();
     delete[] listacli1;
 
     ifstream archiAsis;
     archiAsis.open("asistencias_1697673600000.dat");
-    int nasi=-1;
+    int nasi=5;
     sAsistencia* listaasis1=new sAsistencia[nasi];
-    //falta resize
-    LeerAsistencia(&archiAsis, listaasis1);
+    if(!archiAsis.is_open())
+        return-1;
+    nasi=(nasi)+1;
+    sAsistencia*aux1=new sAsistencia[nasi];
+    for(int i=0;i<nasi-1;i++){
+        aux1[i]=listaasis1[i];
+    }
+    delete[]listaasis1;
+    listaasis1=aux1;
+
+    for(int i=0;i<nasi;i++){
+        archiAsis.read((char*)&listaasis1[i],sizeof(sAsistencia));
+
+    }
+
+//    LeerAsistencia(&archiAsis, listaasis1);
     archiAsis.close();
 
 
     ofstream Asistencia;
-    bool resul=EscribirAsistencia(&Asistencia, listaasis1);
-    cout<<resul;
+    if(!Asistencia.is_open())
+        return false;
+    Asistencia.write((char*)listaasis1,sizeof(sAsistencia));
+
+//    bool resul=EscribirAsistencia(&Asistencia, listaasis1);
+    //cout<<resul;
     Asistencia.close();
     delete[] listaasis1;
 
 
 
     int opcion=0;
-    int n=-1;
+    int n=4;
     sCupos* cuponuevo=new sCupos[n];// N WHAT
 
 
