@@ -1,7 +1,7 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
-
+#include "libreria.h"
 #include "gimnasio.h"
 #include "clientes.h"
 #include <fstream>

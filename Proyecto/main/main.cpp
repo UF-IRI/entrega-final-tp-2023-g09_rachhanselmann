@@ -2,8 +2,8 @@
 #include <string>
 #include <fstream>
 
-#include "gimnasio.h"
-#include "clientes.h"
+//#include "gimnasio.h"
+//#include "clientes.h"
 #include "funciones.h"
 
 using namespace std;
@@ -31,14 +31,7 @@ int main() {
     char coma=',';
     string linea;
 
-//    void resize_cli(sClientes*& lista, int &n){
-//        n=(n)+1;
-//        sClientes *aux=new sClientes[n];
-//        for(int i=0;i<n-1;i++){
-//            aux[i]=lista[i];}
-//        delete[] lista;
-//        lista=aux;
-//    }
+
 
     while(getline(archiCli,linea)){
         ncli=(ncli)+1;

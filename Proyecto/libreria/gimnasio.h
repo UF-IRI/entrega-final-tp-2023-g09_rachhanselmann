@@ -3,21 +3,14 @@
 #include <string>
 #include <iostream>
 #include <ctime>
-#include "clientes.h"
+
 #include <fstream>
 using namespace std;
 
 #define cupos_total_gym 30;
 
 
-struct gym{
-    unsigned int IDcurso;
-    tm FechaInsc;
-    sClientes* misclientes;
-    string clase;
-    tm horario;
 
-}; typedef struct gym sGimnasio;
 
 
 struct Clases{

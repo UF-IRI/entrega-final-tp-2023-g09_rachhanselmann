@@ -118,7 +118,7 @@ TEST_CASE("Escribir archivo de clientes") {
     int N = 3;
 
     ofstream archi;
-    archi.open("");
+    archi.open("iriClientesGYM.csv");
     stringstream ss;
 
     bool resultado = EscribirArchivoClientes(&archi, listaClientes, N);
