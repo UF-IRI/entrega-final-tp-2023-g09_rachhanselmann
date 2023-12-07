@@ -368,7 +368,7 @@ void MenuPrincipal()
     cout << "\t0. Salir"<<endl;
 }
 
-sAsistencia* eliminarrepetidos(sAsistencia* lista, int& n) {
+void eliminarrepetidos(sAsistencia* lista, int& n) {
     int i, j;
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
@@ -380,7 +380,6 @@ sAsistencia* eliminarrepetidos(sAsistencia* lista, int& n) {
             }
         }
     }
-    return lista;
 }
 
 

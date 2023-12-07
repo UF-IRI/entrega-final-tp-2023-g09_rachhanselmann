@@ -13,15 +13,15 @@ int main() {
 
     ifstream archiClase;
     archiClase.open("iriClasesGYM.csv", ios::in);
-    int ncla=-1;
+    int ncla=0;
     sClases* listacla1=new sClases[ncla];
     LeerArchivoClasesaLista(&archiClase, listacla1, ncla);
     archiClase.close();
-    delete[] listacla1;
+    //delete[] listacla1;
 
     ifstream archiCli;
-    archiCli.open("iriClientesGYM.csv");
-    int ncli=8;
+    archiCli.open("iriClientesGYM.csv", ios::in);
+    int ncli=0;
     sClientes* listacli1=new sClientes[ncli];
 
     if(!archiCli.is_open())
@@ -66,11 +66,11 @@ int main() {
 
 //    ClienteLista(&archiCli, listacli1, ncli);
     archiCli.close();
-    delete[] listacli1;
+    //delete[] listacli1;
 
     ifstream archiAsis;
-    archiAsis.open("asistencias_1697673600000.dat", ios::in);
-    int nasi=5;
+    archiAsis.open("asistencias_1697673600000.dat", ios::binary);
+    int nasi=0;
     sAsistencia* listaasis1=new sAsistencia[nasi];
     if(!archiAsis.is_open())
         return-1;
@@ -104,9 +104,10 @@ int main() {
 
 
     int opcion=0;
-    int n=4;
-    sCupos* cuponuevo=new sCupos[n];// N WHAT
-    sAsistencia* listanuevaasis= new sAsistencia[n]; //N WHAT??
+    int n=-1;
+    sCupos* cuponuevo=new sCupos[n];
+    sAsistencia* listanuevaasis= new sAsistencia[n];
+    resize_asis(listanuevaasis, n);
 
     sInscripcion*inscrip=new sInscripcion{12, {23, 4, 322, 23}};
     sAsistencia*asist=new sAsistencia{7, 11, {inscrip}};
@@ -150,7 +151,7 @@ int main() {
     }while(opcion!=0);
 
 
-    listanuevaasis=eliminarrepetidos(listanuevaasis, n);
+    eliminarrepetidos(listanuevaasis, n);
 
     ofstream archivoes("archivo_nuevo.dat", ios::binary);
     bool ult=EscribirAsismañana(&archivoes, listanuevaasis);

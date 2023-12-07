@@ -219,7 +219,7 @@ TEST_CASE("Eliminar repetidos de la lista de asistencia") {
 
     int n = 4;
 
-    sAsistencia* listaSinRepetidos = eliminarrepetidos(listaAsistencia, n);
+   eliminarrepetidos(listaAsistencia, n);
 
     SECTION("Verifica que los repetidos fueron eliminados") {
 
